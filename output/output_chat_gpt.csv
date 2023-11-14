@@ -1,0 +1,228 @@
+data,output
+2_1,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        transformed_row = []
+        for value in row:
+            if value != '':
+                transformed_row.append(value)
+        transformed_data.append(transformed_row)
+    return transformed_data"
+2_2,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        if row[2] == '':
+            continue
+        transformed_row = [row[0], row[1], row[2], row[3], row[4], row[5], row[6]]
+        transformed_data.append(transformed_row)
+    return transformed_data"
+2_3,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        if row[2] != '':
+            transformed_row = [row[0], row[1], row[2]]
+            transformed_data.append(transformed_row)
+        else:
+            transformed_row = [row[0], row[1], row[3], row[4], row[5], row[6]]
+            transformed_data[-1].extend(transformed_row)
+    return transformed_data"
+2_4,"def transform_data(dataset):
+    transformed_data = []
+    for row in dataset:
+        transformed_row = []
+        if row[0].startswith('#'):
+            transformed_row.append(row[0])
+            transformed_row.append(row[1])
+            transformed_row.append(row[2])
+            transformed_row.append(row[3])
+            transformed_row.append(row[4])
+            transformed_row.append(row[5])
+            transformed_row.append(row[6])
+        else:
+            transformed_row.append(row[0])
+            transformed_row.append(row[1])
+            transformed_row.append(row[2])
+            transformed_row.append(row[3])
+            transformed_row.append(row[4])
+            transformed_row.append(row[5])
+            transformed_row.append(row[6])
+            transformed_row.append(row[1])
+            transformed_row.append(row[2])
+            transformed_row.append(row[3])
+            transformed_row.append(row[4])
+        transformed_data.append(transformed_row)
+    return transformed_data
+
+# Example usage:
+input_dataset = [['3099', '905', ' AUST 4WD CUST ACT', '', '', '', ''], ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'], ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0'], ['3167', '906', 'AUST PERSONAL COMPUTER', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '6.7839', '3', '* *', '0'], ['2929', '924', 'AUTO ACTION', '', '', '', ''], ['#1344', '#1344', 'Covers Only', '3.8181', '3', '* *', '0']]
+output_dataset = transform_data(input_dataset)
+print(output_dataset)
+```
+
+Note: The above code assumes that the input dataset is a list of lists, where each inner list represents a row of data. The code iterates over each row and checks if the first element of the row starts with '#'. If it does, it appends all the elements of the row to the transformed row. If it doesn't, it appends the first six elements of the row to the transformed row and then appends the second to fifth elements of the row again. Finally, it appends the transformed row to the transformed data list. The function `transform_data` takes the input dataset as a parameter and returns the transformed dataset."
+2_5,"def transform_data(dataset):
+    transformed_data = []
+    for row in dataset:
+        transformed_row = []
+        transformed_row.append(row[0])
+        transformed_row.append(row[1])
+        transformed_row.append(row[2])
+        transformed_row.append(row[3])
+        transformed_row.append(row[4])
+        transformed_row.append(row[5])
+        transformed_row.append(row[6])
+        transformed_data.append(transformed_row)
+    return transformed_data"
+3_1,"# Given input dataset before transformation
+input_dataset = [['33195', ''], ['Promotion', ''], ['2/13/2009', '821017'], ['3/30/2009', '65320'], ['', '39902']]
+
+# Initialize an empty list to store the transformed dataset
+transformed_dataset = []
+
+# Iterate through each row in the input dataset
+for row in input_dataset:
+    # Check if the row is not empty
+    if row[0] != '':
+        # Initialize a new list to store the transformed row
+        transformed_row = []
+        
+        # Iterate through each element in the row
+        for element in row:
+            # Check if the element is not empty
+            if element != '':
+                # Append the element to the transformed row
+                transformed_row.append(element)
+        
+        # Append the transformed row to the transformed dataset
+        transformed_dataset.append(transformed_row)
+
+# Print the transformed dataset
+print(transformed_dataset)"
+3_1,"def transform_data(input_data):
+    transformed_data = []
+    temp_row = []
+    for row in input_data:
+        if row[0] != '':
+            temp_row.append(row[0])
+        if row[1] != '':
+            temp_row.append(row[1])
+        if row[0] == '' and row[1] == '':
+            transformed_data.append(temp_row)
+            temp_row = []
+        if row[2] != '':
+            temp_row.append(row[2])
+        if row[3] != '':
+            temp_row.append(row[3])
+    return transformed_data"
+3_2,"def transform_data(input_data):
+    transformed_data = []
+    temp_row = []
+    for row in input_data:
+        if row[0] != '':
+            temp_row.append(row[0])
+        if row[1] != '':
+            temp_row.append(row[1])
+        if len(temp_row) == 4:
+            transformed_data.append(temp_row)
+            temp_row = []
+    return transformed_data"
+3_3,"def transform_data(input_data):
+    transformed_data = []
+    temp_row = []
+    for row in input_data:
+        if row[0] != '':
+            temp_row = row
+        else:
+            temp_row.extend(row)
+            transformed_data.append(temp_row)
+    return transformed_data"
+3_4,"def transform_data(input_data):
+    transformed_data = []
+    temp_row = []
+    
+    for row in input_data:
+        if row[0] != '':
+            temp_row.append(row[0])
+        if row[1] != '':
+            temp_row.append(row[1])
+        if len(temp_row) == 4:
+            transformed_data.append(temp_row)
+            temp_row = []
+    
+    return transformed_data"
+3_5,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        make = row[0]
+        color = row[1]
+        year = row[2]
+        transformed_data.append([make, color])
+        transformed_data.append([make, year])
+    return transformed_data"
+4_1,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        make = row[0]
+        color = row[1]
+        transformed_data.append([make, color])
+        for i in range(2, len(row)):
+            transformed_data.append([make, row[i]])
+    return transformed_data"
+4_1,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        car_make = row[0]
+        car_color = row[1]
+        transformed_data.append([car_make, car_color])
+        for i in range(2, len(row)):
+            car_info = row[i]
+            transformed_data.append([car_make, car_info])
+    return transformed_data"
+4_2,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data:
+        car = row[0]
+        color = row[1]
+        transformed_data.append([car, color])
+        transformed_data.append([car, row[2]])
+    return transformed_data"
+4_3,"def transform_data(dataset):
+    transformed_data = []
+    for data in dataset:
+        transformed_data.append([data[0], data[1]])
+        transformed_data.append([data[0], data[2]])
+    return transformed_data"
+4_4,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data[1:]:
+        for value in row[1:]:
+            transformed_data.append([row[0], value])
+    return transformed_data"
+4_5,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data[1:]:
+        for value in row[1:]:
+            if value != '':
+                transformed_data.append([row[0], value])
+    return transformed_data"
+5_1,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data[1:]:
+        for value in row[1:]:
+            if value != '':
+                transformed_data.append([row[0], value])
+    return transformed_data"
+5_1,"def transform_data(input_data):
+    transformed_data = []
+    for row in input_data[1:]:
+        for i in range(1, len(row)):
+            if row[i] != '':
+                transformed_data.append([row[0], row[i]])
+    return transformed_data"
+5_2,"def transform_data(dataset):
+    transformed_data = []
+    for row in dataset[1:]:
+        for i in range(1, len(row)):
+            if row[i] != '':
+                transformed_data.append([row[0], row[i]])
+    return transformed_data"

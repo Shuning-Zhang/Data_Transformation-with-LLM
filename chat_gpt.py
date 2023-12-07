@@ -29,7 +29,7 @@ def gpt_output(template_c, GPT_Model):
     result= []
     for j in range(2,3):
         for i in range(1,2):
-            path = 'data/exp0_'+str(j) + '_'+ str(i)+ '.txt'
+            path = 'data/foofah/exp0_'+str(j) + '_'+ str(i)+ '.txt'
             input_data, test_data = read_in_data(path)
             llm = GPT_Model.environemnt_setup()
             # tutorial = GPT_Model.get_tutorial(llm, input_data)
@@ -66,6 +66,7 @@ template_c= '''
 
 # o stands for output
 result = gpt_output(template_c, GPT_Model)
+
 output= []
 for x in result:
     if 'python\n' in x[1]:

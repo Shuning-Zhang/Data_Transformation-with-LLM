@@ -11,7 +11,7 @@
 
 
 import pandas as pd
-from data_transform_csv import read_in_data
+from data_access import read_in_data
 input_data, test_data = read_in_data('data/exp0_2_1.txt')
     
 def data_transformation(inputdata):

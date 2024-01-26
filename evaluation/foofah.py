@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 
-from data_transform_csv import read_in_data, read_output_data
+from data_access import read_in_data, read_output_data
 
 def calculate_acc(lower_bound = 2, upper_bound = 0):
         # Read in data

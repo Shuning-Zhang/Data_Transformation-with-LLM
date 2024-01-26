@@ -8,7 +8,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.callbacks import get_openai_callback
 import sys
 sys.path.append('../')
-from data_transform_csv import read_in_data
+from data_access import read_in_data
 
 class GPT_Model:
 

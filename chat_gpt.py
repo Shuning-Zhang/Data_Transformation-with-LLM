@@ -5,9 +5,10 @@ from langchain.chat_models import ChatOpenAI
 from langchain.chains import LLMChain
 from langchain.prompts import PromptTemplate
 from langchain.callbacks import get_openai_callback
-from data_transform_csv import read_in_data
+from data_access import read_in_data
 # api key:
 # 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
+# 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
 
 
 class GPT_Model:
@@ -27,9 +28,9 @@ class GPT_Model:
     
 def gpt_output(template_c, GPT_Model):
     result= []
-    for j in range(2,3):
-        for i in range(1,2):
-            path = 'data/foofah/exp0_'+str(j) + '_'+ str(i)+ '.txt'
+    for j in range(3,4):
+        for i in range(1,6):
+            path = 'data/foofah/exp0_'+str(j) + '_'+ str(i)+'_new'+ '.txt'
             input_data, test_data = read_in_data(path)
             llm = GPT_Model.environemnt_setup()
             # tutorial = GPT_Model.get_tutorial(llm, input_data)
@@ -48,7 +49,7 @@ def gpt_output(template_c, GPT_Model):
 
 
 # set up the gpt model
-GPT_Model = GPT_Model('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')
+GPT_Model = GPT_Model('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')
 # setting up template
 template_c= '''
         You are given an example dataset before the transformation {input_list} and after the transformation {output_list}. 
@@ -64,20 +65,31 @@ template_c= '''
 
     ''' 
 
-# o stands for output
-result = gpt_output(template_c, GPT_Model)
+template_updated = '''
+        Givin an example input and output dataset, learn how the transformation performed from the provided input dataset to the output dataset. 
+        Pay attention to the size difference between the input and output dataset.
+        Generate python function with no explantations needed. 
+        input dataset: {input_list} 
+        output dataset: {output_list}
 
+
+
+'''
+
+# o stands for output
+result = gpt_output(template_updated, GPT_Model)
+# print(result)
 output= []
 for x in result:
-    if 'python\n' in x[1]:
-        o = x[1].split('python\n')
-    else:
-        o = x[1].split('Generated Code:\n\n')
+    # if 'python\n' in x[1]:
+    #     o = x[1].split('python\n')
+    # else:
+    #     o = x[1]
 
 
-    o = o[1].split('\n\ninput_data')
+    o = x[1].split('\n\ninput_data')
     d = {'data': x[0],'output': o[0]}
 
     output.append(d)
 df = pd.DataFrame(output)
-df.to_csv('output_chat_gpt.csv', index=False)
+df.to_csv('output_chat_gpt_new_exp3.csv', index=False)

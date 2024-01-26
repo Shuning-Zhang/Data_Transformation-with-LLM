@@ -1,1 +1,0 @@
-Create a new element whose attributes contain text in two previous elements

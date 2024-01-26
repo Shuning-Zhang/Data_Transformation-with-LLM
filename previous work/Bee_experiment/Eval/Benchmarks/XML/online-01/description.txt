@@ -1,1 +1,0 @@
-Set text in <title> as 'Error' if it is empty.

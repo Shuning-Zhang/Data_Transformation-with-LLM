@@ -1,1 +1,0 @@
-Create a new empty p element under each item

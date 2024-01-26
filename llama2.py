@@ -3,7 +3,7 @@ import transformers
 import pandas as pd
 from torch import cuda, bfloat16
 from langchain.chains import LLMChain
-from data_transform_csv import read_in_data
+from data_access import read_in_data
 from langchain.prompts import PromptTemplate
 from IPython.display import display, Markdown
 from langchain.llms import HuggingFacePipeline

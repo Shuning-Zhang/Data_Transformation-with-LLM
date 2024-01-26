@@ -1,1 +1,0 @@
-Extract all strings in attr & text.

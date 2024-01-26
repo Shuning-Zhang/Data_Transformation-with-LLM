@@ -1,1 +1,0 @@
-If string in colwidth doesn't end with '*', then add '*' on it.

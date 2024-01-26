@@ -1,1 +1,0 @@
-Create a new element under each item, with text being the first character of the value of attribute 'Episode_Number'.

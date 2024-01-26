@@ -1,0 +1,504 @@
+data,output
+2_1,"def transform_data(input_dataset):
+    # Step 1: Remove empty strings
+    cleaned_dataset = []
+    for row in input_dataset:
+        if len(row) > 0:
+            cleaned_dataset.append(row)
+    return cleaned_dataset"
+2_2,"def transform_data(input_dataset):
+    # Step 1: Remove empty rows
+    filtered_dataset = []
+    output_data = []
+    for row in input_dataset:
+        if len(row) > 0:
+            filtered_dataset.append(row)
+    input_dataset = filtered_dataset
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_dataset)):
+        for x in input_dataset[i]:
+            if x in ["*", " ",""]:
+                input_dataset[i].remove(x)
+
+    # Step 3: Rearrange columns
+    column_names = list(input_dataset[0])
+    for i in range(0,len(column_names),2):
+        row1 = input_dataset[i]
+        row2 = input_dataset[i+1]
+        output_data.append(row1 + row2)
+
+    return output_data"
+2_3,"def transform_data(input_dataset):
+    # Step 1: Remove empty rows
+    filtered_dataset = []
+    output_data = []
+    for row in input_dataset:
+        if len(row) > 0:
+            filtered_dataset.append(row)
+    input_dataset = filtered_dataset
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_dataset)):
+        for x in input_dataset[i]:
+            if x in ["*", " ",""]:
+                input_dataset[i].remove(x)
+
+    # Step 3: Rearrange columns
+    column_names = list(input_dataset[0])
+    for i in range(0,len(column_names),2):
+        row1 = input_dataset[i]
+        row2 = input_dataset[i+1]
+        output_data.append(row1 + row2)
+
+    return output_data"
+2_4,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = []
+    output_data = []
+    for x in input_data:
+        if x not in unique_data:
+            unique_data.append(x)
+    
+    # Step 2: Replace empty values with blank strings
+    cleaned_data = [item for item in unique_data if item!= ""]
+    
+    
+    for i in range(len(cleaned_data)):
+        for x in cleaned_data[i]:
+            if x in ["*", " ",""]:
+                cleaned_data[i].remove(x)
+
+    # Step 3: Rearrange columns
+    column_names = list(cleaned_data[0])
+    for i in range(0,len(column_names),2):
+        row1 = cleaned_data[i]
+        row2 = cleaned_data[i+1]
+        output_data.append(row1 + row2)
+    
+    return output_data"
+2_5,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = list(set(input_data))
+    
+    # Step 2: Convert all text to uppercase
+    uppercase_data = [x.upper() for x in unique_data]
+    
+    # Step 3: Replace special characters with underscores
+    underscore_data = [x.replace('*', '_') for x in uppercase_data]
+    
+    # Step 4: Add a timestamp to each row
+    timestamps = [datetime.date.today() + datetime.timedelta(days=x) for x in range(len(underscore_data))]
+    merged_data = underscore_data + [timestamps[i]] for i in range(len(underscore_data))
+    
+    return merged_data"
+3_1,"def transform_data(input_data):
+    # Step 1: Extract the first value from each row
+    first_value = input_data[0]
+    
+    # Step 2: Check if the second value is empty
+    if input_data[1] == "":
+        # Step 3: Add the first value to a new list
+        new_list = [first_value]
+    else:
+        # Step 4: Add the first value and the second value to a new list
+        new_list = [first_value, input_data[1]]
+    
+    # Step 5: Repeat steps 2-4 for each row in the input data
+    for i in range(len(input_data)-1):
+        new_list.append(first_value)
+        if input_data[i+1] == "":
+            new_list.append(first_value)
+        else:
+            new_list.append(first_value + input_data[i+1])
+    
+    return new_list"
+
+3_2,"def transform_data(input_data):
+    # Step 1: Extract the first column
+    first_column = input_data[0]
+    
+    # Step 2: Replace all occurrences of "''" with the corresponding value from the second column
+    for i in range(len(input_data)):
+        input_data[i][1] = input_data[i][1].replace("''", input_data[i][0])
+    
+    # Step 3: Add a new column with the values from the third column
+    for i in range(len(input_data)):
+        input_data.append([first_column, input_data[i][0], input_data[i][1]])
+    
+    return input_data"
+3_3,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = [row for row in input_data if len(row) > 0]
+    
+    # Step 2: Replace blank cells with corresponding values from previous row
+    for i in range(len(filtered_data)):
+        current_row = filtered_data[i]
+        previous_row = filtered_data[i-1]
+        if current_row == "" and previous_row!= "":
+            filtered_data[i] = previous_row
+    
+    # Step 3: Replace all occurrences of ""Promotion"" with ""Actual Promotion""
+    for i in range(len(filtered_data)):
+        for x in filtered_data[i]:
+            if x == "Promotion":
+                x = "Actual Promotion"
+    
+    # Step 4: Add new column with calculated value
+    filtered_data.append([])
+    for i in range(len(filtered_data)):
+        filtered_data[-1].append(filtered_data[i][0] + filtered_data[i][1])
+    
+    return filtered_data"
+3_4,"def transform_data(input_data):
+    # Step 1: Extract column names
+    column_names = [col for col in input_data if col!= '']
+    
+    # Step 2: Create new column names
+    new_column_names = ['Promotion'] * len(column_names)
+    
+    # Step 3: Replace column values with Promotion
+    for i in range(len(column_names)):
+        new_column_names[i] = 'Promotion'
+        input_data[new_column_names[i]] = input_data[column_names[i]]
+    
+    return input_data"
+3_5,"def transform_data(input_data):
+    # Step 1: Extract Promotion column
+    promotion_column = []
+    for row in input_data:
+        if "Promotion" in row[1]:
+            promotion_column.append(row[1])
+    
+    # Step 2: Extract Date columns
+    date_columns = []
+    for row in input_data:
+        if row[1] in ["Year end", "Com"]:
+            date_columns.append(row[1])
+    
+    # Step 3: Extract Number columns
+    number_columns = []
+    for row in input_data:
+        if row[1] in ["Contribution Pending", "Contribution Holdings"]:
+            number_columns.append(row[1])
+    
+    # Step 4: Concatenate columns
+    combined_data = []
+    for row in input_data:
+        combined_data.append([row[0], row[1], promotion_column, date_columns, number_columns])
+    
+    return combined_data"
+4_1,"def transform_data(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        output_dataset.append([data[0], data[1]])
+        output_dataset.append([data[0], data[2]])
+    return output_dataset"
+4_2,"def transform_data(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        # Step 1: Separate the car made and color
+        car = data[0]
+        color = data[1]
+        # Step 2: Add the car made and color to the output dataset
+        output_dataset.append([car, color])
+        output_dataset.append([car, data[2]])
+        
+    return output_dataset"
+4_3,"def transform_data(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        # Step 1: Separate the car made and color
+        car = data[0]
+        color = data[1]
+        # Step 2: Add the car made and color to the output dataset
+        output_dataset.append([car, color])
+        output_dataset.append([car, data[2]])
+        
+    return output_dataset"
+4_4,"def transform_data(input_data):
+    output_data = []
+    for row in input_data:
+        car_make = row[0]
+        color_or_year = row[1:]
+        for value in color_or_year:
+            output_data.append([car_make, value])
+    return output_data"
+4_5,"def transform_data(input_data):
+    output_data = []
+    for row in input_data:
+        car_make = row[0]
+        color_or_year = row[1:]
+        for value in color_or_year:
+            output_data.append([car_make, value])
+    return output_data"
+
+5_1,"def transform_data(input_dataset):
+    # Step 1: Extract the first element of the dataset
+    first_element = input_dataset[0]
+    
+    # Step 2: Create a new list with only the second element of each row
+    new_dataset = []
+    for row in input_dataset:
+        new_dataset.append(row[1])
+    
+    # Step 3: Concatenate the new list with the original list
+    transformed_dataset = list(zip(first_element, new_dataset))
+    
+    return transformed_dataset"
+5_2,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = [row for row in input_data if len(row) > 0]
+    
+    # Step 2: Replace missing values with nan
+    # replaced_data = [None for row in filtered_data if any(row == '')]
+    
+    # Step 3: Replace duplicates
+    unique_data = [row for row in filtered_data if len(set(row)) == len(row)]
+    
+    # Step 4: Sort the data
+    sorted_data = [sorted(row, key=lambda x: x.lower()) for row in unique_data]
+    
+    return sorted_data"
+5_3,"def transform_data(dataset):
+    transformed_data = []
+    for row in dataset[1:]:
+        for i in range(1, len(row)):
+            if row[i] != '':
+                transformed_data.append([row[0], row[i]])
+    return transformed_data"
+
+5_4,"def transform_data(input_data):
+    # Step 1: Remove rows with missing values
+    filtered_data = []
+    for row in input_data:
+        if all(row):
+            filtered_data.append(row)
+    input_data = filtered_data
+
+    # Step 2: Replace blank cells with zeroes
+    for i in range(len(input_data)):
+        if input_data[i] == """":
+            input_data[i] = 0
+
+    # Step 3: Sort the data
+    sorted_data = sorted(input_data, key=lambda x: x[0])
+    input_data = sorted_data
+
+    # Step 4: Create new columns by concatenating existing ones
+    new_columns = []
+    for i in range(len(input_data)):
+        new_column = []
+        for j in range(i+1, len(input_data)):
+            new_column.append(input_data[j][0])
+        input_data.insert(i, new_column)
+    input_data = input_data[:i] + new_columns + input_data[i:]
+
+    return input_data"
+
+5_5,"def transform_data(dataset):
+    transformed_data = []
+    for row in dataset[1:]:
+        for i in range(1, len(row)):
+            if row[i] != '':
+                transformed_data.append([row[0], row[i]])
+    return transformed_data"
+
+6_1,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = []
+    for row in input_data:
+        if len(row) > 0:
+            filtered_data.append(row)
+    input_data = filtered_data
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_data)):
+        for x in input_data[i]:
+            if x in ["*", " ",""]:
+                input_data[i].remove(x)
+    input_data = input_data
+
+    # Step 3: Rearrange columns
+    new_data = []
+    for row in input_data:
+        new_row = []
+        for col in row:
+            new_row.append(col)
+        new_data.append(new_row)
+    input_data = new_data
+
+    return input_data"
+6_2,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = [row for row in input_data if len(row) > 0]
+    
+    # Step 2: Replace missing values with zeros
+    filled_data = [[int(val) if val else 0 for _ in range(4)] for row in filtered_data]
+    
+    # Step 3: Rearrange columns
+    merged_data = [filled_data[i] for i in range(4)]
+    
+    # Step 4: Add new columns
+    transformed_data = [[x, y, z, Product] for x, y, z, Product in merged_data]
+    
+    return transformed_data"
+6_3,"def transform_data(input_data):
+    # Step 1: Extract the dates from the input data
+    dates = []
+    for row in input_data:
+        dates.append(row[0])
+    
+    # Step 2: Create a new list with the dates as the first column
+    new_data = [[dates[i]] for i in range(len(input_data))]
+    
+    # Step 3: Add the product names to the new data
+    for i in range(len(input_data)):
+        new_data[i][1:] = input_data[i]
+    
+    return new_data"
+6_4,"import numpy as np
+def transform_data(input_data):
+    # Step 1: Extract the dates from the input data
+    dates = []
+    for row in input_data:
+        dates.append(row[0])
+    
+    # Step 2: Create a new list with the dates and their corresponding values
+    values = []
+    for i in range(len(dates)):
+        values.append([dates[i], row[1]])
+    
+    # Step 3: Flatten the list of lists into a single list
+    flattened_values = list(values)
+    
+    # Step 4: Transform the data by concatenating the values along the first axis
+    transformed_data = np.concatenate((flattened_values), axis=0)
+    
+    return list(transformed_data)"
+6_5,"def transform_data(input_data):
+    # Step 1: Extract the dates from the input data
+    dates = []
+    for row in input_data:
+        dates.append(row[0])
+    
+    # Step 2: Create a new list with the dates as the first column
+    new_data = [[dates[i]] + row[1:] for i in range(len(dates))]
+    
+    return new_data"
+7_1,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = []
+    for row in input_data:
+        if len(row) > 0:
+            filtered_data.append(row)
+    input_data = filtered_data
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_data)):
+        for x in input_data[i]:
+            if x in ["*", " ",""]:
+                input_data[i].remove(x)
+    input_data = input_data
+
+    # Step 3: Rearrange columns
+    new_data = []
+    for row in input_data:
+        new_row = []
+        for col in row:
+            new_row.append(col)
+        new_data.append(new_row)
+    input_data = new_data
+
+    return input_data"
+7_2,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = []
+    for row in input_data:
+        if len(row) > 0:
+            filtered_data.append(row)
+    input_data = filtered_data
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_data)):
+        for x in input_data[i]:
+            if x in ["*", " ",""]:
+                input_data[i].remove(x)
+    input_data = input_data
+
+    # Step 3: Reverse the order of the columns
+    reversed_data = []
+    for row in input_data:
+        reversed_row = []
+        for col in row:
+            reversed_row.append(col)
+        reversed_data.append(reversed_row)
+    input_data = reversed_data
+
+    # Step 4: Add a unique identifier to each row
+    unique_id = 0
+    for row in input_data:
+        unique_id += 1
+        row.insert(0, f"{unique_id}")
+    input_data = row
+
+    return input_data"
+7_3,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = input_data
+    
+    # Step 2: Replace special characters with underscores
+    for i in range(len(unique_data)):
+        for x in unique_data[i]:
+            if x in ["*", " ",""]:
+                unique_data[i].remove(x)
+    replaced_data = unique_data
+    
+    # Step 3: Add prefix and suffix to each item
+    formatted_data = ['_{}_{}'.format(prefix, x) for prefix in ['3618', '11931', 'MEQUON, WI 53092'] for x in replaced_data]
+    
+    return formatted_data"
+7_4,"import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = input_data.drop_duplicates()
+    
+    # Step 2: Convert dates to datetime format
+    unique_data['date'] = pd.to_datetime(unique_data['date'])
+    
+    # Step 3: Add missing values
+    unique_data['name'] = unique_data['name'].fillna('')
+    unique_data['breed'] = unique_data['breed'].fillna('')
+    unique_data['gender'] = unique_data['gender'].fillna('')
+    unique_data['age'] = unique_data['age'].fillna(0)
+    
+    # Step 4: Transform categorical variables
+    unique_data['category'] = unique_data['category'].apply(lambda x: x.split('/')[0])
+    
+    # Step 5: Create new columns for transformed variables
+    unique_data['new_column'] = unique_data['category'].apply(lambda x: x.split('/')[0])
+    
+    return unique_data"
+7_5,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = []
+    for item in input_data:
+        if item not in unique_data:
+            unique_data.append(item)
+    input_data = unique_data
+
+    # Step 2: Replace special characters with underscores
+    for i in range(len(input_data)):
+        if input_data[i] in string.digits + string.ascii_letters:
+            input_data[i] = ""_"" + str(ord(input_data[i]))
+
+    # Step 3: Reverse the order of the items in the list
+    rev_data = [item for i, item in enumerate(input_data)]
+    input_data = rev_data
+
+    # Step 4: Add a random number to each item
+    for i in range(len(input_data)):
+        input_data[i].append(randint(1, 1000))
+
+    return input_data"

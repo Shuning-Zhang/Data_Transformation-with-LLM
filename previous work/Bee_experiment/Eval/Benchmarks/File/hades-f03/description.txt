@@ -1,1 +1,0 @@
-Copy all text and bash files to directory temp

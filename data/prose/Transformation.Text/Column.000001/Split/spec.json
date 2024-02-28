@@ -1,0 +1,1 @@
+{"InputTable": [["Coln8"], ["Coln5"], ["ID"], ["Coln9"], ["ID"]], "OutputTable": ["Col8", "Col5", "Col1", "Col9", "Col1"], "TestingTable": [["Coln2"], ["ID"], ["ID"], ["Coln4"], ["Coln0"]], "TestAnswer": ["Col2", "Col1", "Col1", "Col4", "Col0"]}

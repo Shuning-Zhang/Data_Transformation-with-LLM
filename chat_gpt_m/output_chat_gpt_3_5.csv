@@ -1,0 +1,399 @@
+data,output
+potters_wheel_unfold2_1,"def transform_data(input_data):
+    output_data = []
+    for data in input_data:
+        if data[0] == 'Latimer':
+            output_data.append(data)
+    return output_data"
+potters_wheel_unfold2_2,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for data in input_data:
+        if data[0] in temp_dict:
+            temp_dict[data[0]].append(data[1])
+        else:
+            temp_dict[data[0]] = [data[1]]
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data
+
+# Test the function with the provided input dataset
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary']]
+print(transform_data(input_data))"
+potters_wheel_unfold2_3,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] in temp_dict:
+            temp_dict[item[0]].append(item[1])
+        else:
+            temp_dict[item[0]] = [item[1]]
+    
+    for key, value in temp_dict.items():
+        while len(value) < 3:
+            value.append('')
+        output_data.append([key] + value)
+    
+    return output_data
+
+# Test the function with the provided input dataset
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary'], ['Latimer', 'Bob']]
+print(transform_data(input_data))"
+potters_wheel_unfold2_4,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] not in temp_dict:
+            temp_dict[item[0]] = [item[1], '', '']
+        else:
+            temp_dict[item[0]].append(item[1])
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data
+
+# Test the function with the provided input dataset
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary'], ['Latimer', 'Bob'], ['Stark', 'Eddard']]
+print(transform_data(input_data))"
+potters_wheel_unfold2_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp_dict = {}
+    
+    for item in input_dataset:
+        if item[0] in temp_dict:
+            temp_dict[item[0]].append(item[1])
+        else:
+            temp_dict[item[0]] = [item[1]]
+    
+    for key, value in temp_dict.items():
+        while len(value) < 4:
+            value.append('')
+        output_dataset.append([key] + value)
+    
+    return output_dataset
+
+# Test the function with the provided input dataset
+input_dataset = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary'], ['Latimer', 'Bob'], ['Stark', 'Eddard'], ['Lanister', 'Jaime'], ['Lanister', 'Cersei']]
+print(transform_dataset(input_dataset))
+```"
+proactive_wrangling_fold_1,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    for i in range(1, len(input_data[1])):
+        output_data.append([input_data[1][0], headers[1], input_data[1][i]])
+        output_data.append([input_data[1][0], headers[2], input_data[1][i]])
+    return output_data
+
+# Test the function with the provided input dataset
+input_data = [['', 'Boys', 'Girls'], ['Australia', '1', '2']]
+print(transform_dataset(input_data))"
+proactive_wrangling_fold_2,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    countries = [row[0] for row in input_data[1:]]
+    
+    for country in countries:
+        for header in headers:
+            value = input_data[countries.index(country) + 1][headers.index(header) + 1]
+            output_data.append([country, header, value])
+    
+    return output_data"
+proactive_wrangling_fold_3,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    for i in range(1, len(input_data)):
+        country = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            output_data.append([country, headers[j-1], input_data[i][j]])
+    return output_data"
+proactive_wrangling_fold_4,"```python
+def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    
+    for i in range(1, len(input_data)):
+        country = input_data[i][0]
+        boys = input_data[i][1]
+        girls = input_data[i][2]
+        
+        output_data.append([country, headers[1], boys])
+        output_data.append([country, headers[2], girls])
+    
+    return output_data
+
+# Example input dataset
+input_dataset = [['', 'Boys', 'Girls'], ['Australia', '1', '2'], ['Austria', '3', '4'], ['Belgium', '5', '6'], ['China', '7', '8']]
+
+# Applying the transformation function
+output_dataset = transform_dataset(input_dataset)
+
+print(output_dataset)
+```"
+proactive_wrangling_fold_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0]
+    
+    for i in range(1, len(input_dataset)):
+        country = input_dataset[i][0]
+        boys = input_dataset[i][1]
+        girls = input_dataset[i][2]
+        
+        output_dataset.append([country, headers[1], boys])
+        output_dataset.append([country, headers[2], girls])
+    
+    return output_dataset
+
+# Example input dataset
+input_dataset = [['', 'Boys', 'Girls'], ['Australia', '1', '2'], ['Austria', '3', '4'], ['Belgium', '5', '6'], ['China', '7', '8'], ['France', '1', '1']]
+
+# Applying the transformation function
+output_dataset = transform_dataset(input_dataset)
+
+# Print the output dataset
+print(output_dataset)
+```"
+proactive_wrangling_complex_1,"def transform_data(input_data):
+    output_data = []
+    headers = []
+    
+    for row in input_data:
+        if row[0] != '':
+            headers.append(row[0])
+    
+    output_data.append([''] + headers)
+    
+    for row in input_data:
+        if row[0] != '':
+            output_row = []
+            for header in headers:
+                if header in row[0]:
+                    output_row.append(row[1])
+                else:
+                    output_row.append('')
+            output_data.append(output_row)
+    
+    return output_data"
+proactive_wrangling_complex_2,"```python
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 2):
+        name = input_data[i-1][0]
+        tel = input_data[i][1].split(':')[1]
+        fax = input_data[i+1][1].split(':')[1] if i+1 < len(input_data) else ''
+        
+        output_data.append([name, f'({tel})', f'({fax})'])
+    
+    return output_data
+
+# Input dataset
+input_data = [['Bureau of I.A.', ''], ['Regional Director', 'Numbers'], ['Niles C.', 'Tel:(800)645-8397'], ['', 'Fax:(907)586-7252'], ['', ''], ['Jean H.', 'Tel:(918)781-4600'], ['', 'Fax:(918)781-4604']]
+
+# Output dataset
+output_data = transform_data(input_data)
+
+print(output_data)
+```"
+proactive_wrangling_complex_3,"```python
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+
+# Input dataset
+input_data = [['Bureau of I.A.', ''], ['Regional Director', 'Numbers'], ['Niles C.', 'Tel:(800)645-8397'], ['', 'Fax:(907)586-7252'], ['', ''], ['Jean H.', 'Tel:(918)781-4600'], ['', 'Fax:(918)781-4604'], ['', ''], ['Frank K.', 'Tel:(615)564-6500'], ['', 'Fax:(615)564-6701']]
+
+# Output dataset
+output_data = [['', 'Tel', 'Fax'], ['Niles C.', '(800)645-8397', '(907)586-7252'], ['Jean H.', '(918)781-4600', '(918)781-4604'], ['Frank K.', '(615)564-6500', '(615)564-6701']]
+
+# Check if the function works correctly
+assert transform_data(input_data) == output_data
+```"
+proactive_wrangling_complex_4,"```python
+def transform_dataset(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+
+# Example input dataset
+input_dataset = [['Bureau of I.A.', ''], ['Regional Director', 'Numbers'], ['Niles C.', 'Tel:(800)645-8397'], ['', 'Fax:(907)586-7252'], ['', ''], ['Jean H.', 'Tel:(918)781-4600'], ['', 'Fax:(918)781-4604'], ['', ''], ['Frank K.', 'Tel:(615)564-6500'], ['', 'Fax:(615)564-6701'], ['', ''], ['Eddard S.', 'Tel:(404)555-0121'], ['', 'Fax:(404)555-0139']]
+
+# Applying the transformation function
+output_dataset = transform_dataset(input_dataset)
+
+# Print the output dataset
+print(output_dataset)
+```"
+proactive_wrangling_complex_5,"```python
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+
+# Example input and output dataset
+input_dataset = [['Bureau of I.A.', ''], ['Regional Director', 'Numbers'], ['Niles C.', 'Tel:(800)645-8397'], ['', 'Fax:(907)586-7252'], ['', ''], ['Jean H.', 'Tel:(918)781-4600'], ['', 'Fax:(918)781-4604'], ['', ''], ['Frank K.', 'Tel:(615)564-6500'], ['', 'Fax:(615)564-6701'], ['', ''], ['Eddard S.', 'Tel:(404)555-0121'], ['', 'Fax:(404)555-0139'], ['', ''], ['Robert B.', 'Tel:(517)555-0127'], ['', 'Fax:(517)555-0142']]
+output_dataset = [['', 'Tel', 'Fax'], ['Niles C.', '(800)645-8397', '(907)586-7252'], ['Jean H.', '(918)781-4600', '(918)781-4604'], ['Frank K.', '(615)564-6500', '(615)564-6701'], ['Eddard S.', '(404)555-0121', '(404)555-0139'], ['Robert B.', '(517)555-0127', '(517)555-0142']]
+
+assert transform_data(input_dataset) == output_dataset
+```"
+reshape_table_structure_data_wrangler_1,"```python
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = []
+    salaries = []
+    
+    for data in input_data:
+        years.append(data[0])
+        salaries.append(data[2])
+    
+    output_data.append([years[0]] + salaries)
+    
+    return output_data
+
+# Test the function with the provided input dataset
+input_data = [['2011', '1', '$85k'], ['2011', '2', '$85k'], ['2011', '3', '$85k'], ['2011', '4', '$87k'], ['2011', '5', '$87k'], ['2011', '6', '$88k']]
+print(transform_dataset(input_data))
+```"
+reshape_table_structure_data_wrangler_2,"```python
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            for data in input_data:
+                if data[0] == year and data[1] == str(i):
+                    temp.append(data[2])
+                    break
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+# Example input dataset
+input_data = [['2011', '1', '$85k'], ['2011', '2', '$85k'], ['2011', '3', '$85k'], ['2011', '4', '$87k'], ['2011', '5', '$87k'], ['2011', '6', '$88k'], ['2012', '1', '$92k'], ['2012', '2', '$92k'], ['2012', '3', '$95k'], ['2012', '4', '$95k'], ['2012', '5', '$97k'], ['2012', '6', '$97k']]
+
+# Applying the transformation function
+output_data = transform_dataset(input_data)
+
+# Print the output dataset
+print(output_data)
+```"
+reshape_table_structure_data_wrangler_3,"```python
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set()
+    for entry in input_data:
+        years.add(entry[0])
+    
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            for entry in input_data:
+                if entry[0] == year and entry[1] == str(i):
+                    temp.append(entry[2])
+                    break
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+# Example input and output datasets
+input_data = [['2011', '1', '$85k'], ['2011', '2', '$85k'], ['2011', '3', '$85k'], ['2011', '4', '$87k'], ['2011', '5', '$87k'], ['2011', '6', '$88k'], ['2012', '1', '$92k'], ['2012', '2', '$92k'], ['2012', '3', '$95k'], ['2012', '4', '$95k'], ['2012', '5', '$97k'], ['2012', '6', '$97k'], ['2013', '1', '$102k'], ['2013', '2', '$102k'], ['2013', '3', '$102k'], ['2013', '4', '$102k'], ['2013', '5', '$102k'], ['2013', '6', '$105k']]
+output_data = [['', '1', '2', '3', '4', '5', '6'], ['2011', '$85k', '$85k', '$85k', '$87k', '$87k', '$88k'], ['2012', '$92k', '$92k', '$95k', '$95k', '$97k', '$97k'], ['2013', '$102k', '$102k', '$102k', '$102k', '$102k', '$105k']]
+
+# Check if the function works correctly
+assert transform_dataset(input_data) == output_data
+```"
+reshape_table_structure_data_wrangler_4,"```python
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            value = [data[2] for data in input_data if data[0] == year and data[1] == str(i)]
+            if value:
+                temp.append(value[0])
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+# Input dataset
+input_data = [['2011', '1', '$85k'], ['2011', '2', '$85k'], ['2011', '3', '$85k'], ['2011', '4', '$87k'], ['2011', '5', '$87k'], ['2011', '6', '$88k'], ['2012', '1', '$92k'], ['2012', '2', '$92k'], ['2012', '3', '$95k'], ['2012', '4', '$95k'], ['2012', '5', '$97k'], ['2012', '6', '$97k'], ['2013', '1', '$102k'], ['2013', '2', '$102k'], ['2013', '3', '$102k'], ['2013', '4', '$102k'], ['2013', '5', '$102k'], ['2013', '6', '$105k'], ['2014', '1', '$108k'], ['2014', '2', '$108k'], ['2014', '3', '$110k'], ['2014', '4', '$110k'], ['2014', '5', '$111k'], ['2014', '6', '$111k']]
+
+# Output dataset
+output_data = [['', '1', '2', '3', '4', '5', '6'], ['2011', '$85k', '$85k', '$85k', '$87k', '$87k', '$88k'], ['2012', '$92k', '$92k', '$95k', '$95k', '$97k', '$97k'], ['2013', '$102k', '$102k', '$102k', '$102k', '$102k', '$105k'], ['2014', '$108k', '$108k', '$110k', '$110k', '$111k', '$111k']]
+
+# Check if the function works correctly
+assert transform_dataset(input_data) == output_data
+```"
+reshape_table_structure_data_wrangler_5,"```python
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            value = [data[2] for data in input_data if data[0] == year and data[1] == str(i)]
+            if value:
+                temp.append(value[0])
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+# Example input and output datasets
+input_data = [['2011', '1', '$85k'], ['2011', '2', '$85k'], ['2011', '3', '$85k'], ['2011', '4', '$87k'], ['2011', '5', '$87k'], ['2011', '6', '$88k'], ['2012', '1', '$92k'], ['2012', '2', '$92k'], ['2012', '3', '$95k'], ['2012', '4', '$95k'], ['2012', '5', '$97k'], ['2012', '6', '$97k'], ['2013', '1', '$102k'], ['2013', '2', '$102k'], ['2013', '3', '$102k'], ['2013', '4', '$102k'], ['2013', '5', '$102k'], ['2013', '6', '$105k'], ['2014', '1', '$108k'], ['2014', '2', '$108k'], ['2014', '3', '$110k'], ['2014', '4', '$110k'], ['2014', '5', '$111k'], ['2014', '6', '$111k'], ['2015', '1', '$116k'], ['2015', '2', '$116k'], ['2015', '3', '$117k'], ['2015', '4', '$117k'], ['2015', '5', '$117k'], ['2015', '6', '$117k']]
+output_data = [['', '1', '2', '3', '4', '5', '6'], ['2011', '$85k', '$85k', '$85k', '$87k', '$87k', '$88k'], ['2012', '$92k', '$92k', '$95k', '$95k', '$97k', '$97k'], ['2013', '$102k', '$102k', '$102k', '$102k', '$102k', '$105k'], ['2014', '$108k', '$108k', '$110k', '$110k', '$111k', '$111k'], ['2015', '$116k', '$116k', '$117k', '$117k', '$117k', '$117k']]
+
+# Check if the function works correctly
+assert transform_dataset(input_data) == output_data
+```"

@@ -1,0 +1,1 @@
+{"InputTable": [["CCC"], ["CCC"], ["CCC"], ["Column2"], ["Column6"]], "OutputTable": ["ccc", "ccc", "ccc", "Col_2", "Col_6"], "TestingTable": [["Column9"], ["Column8"], ["AAA"], ["CCC"], ["Column6"]], "TestAnswer": ["Col_9", "Col_8", "aaa", "ccc", "Col_6"]}

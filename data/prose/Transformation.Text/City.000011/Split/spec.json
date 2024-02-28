@@ -1,0 +1,1 @@
+{"InputTable": [["New York City"], ["n.y.c."], ["New York City  "], ["NYC"], ["new york city"]], "OutputTable": ["New York City", "New York City", "New York City", "New York City", "New York City"], "TestingTable": [[null], ["SJ"]], "TestAnswer": [null, "San Jose"]}

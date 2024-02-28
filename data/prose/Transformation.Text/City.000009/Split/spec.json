@@ -1,0 +1,1 @@
+{"InputTable": [["Foo"], ["A"], [null], ["Z"], ["Baz"]], "OutputTable": ["F", "A", "N/A", "Z", "B"], "TestingTable": [[null]], "TestAnswer": ["N/A"]}

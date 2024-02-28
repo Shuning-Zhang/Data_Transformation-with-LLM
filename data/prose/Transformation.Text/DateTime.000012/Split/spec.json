@@ -1,0 +1,1 @@
+{"InputTable": [["1756"], ["12 March 1933"], ["2048"], ["2238"], ["2033"]], "OutputTable": ["1756", "1933", "2048", "2238", "2033"], "TestingTable": [["Unknown"], ["1784"], ["2130"], ["Unknown"], ["4 September 2088"]], "TestAnswer": [null, "1784", "2130", null, "2088"]}

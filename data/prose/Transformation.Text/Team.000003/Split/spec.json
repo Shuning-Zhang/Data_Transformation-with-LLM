@@ -1,0 +1,1 @@
+{"InputTable": [["Green Bay Packers (2)"], ["New York Jets"], ["Dallas Cowboys (2)"], ["Baltimore Colts (4)"], ["New England Patriots (5)"]], "OutputTable": ["Green Bay Packers", "New York Jets", "Dallas Cowboys", "Baltimore Colts", "New England Patriots"], "TestingTable": [["Seattle Seahawks (2)"]], "TestAnswer": ["Seattle Seahawks"]}

@@ -1,0 +1,27 @@
+[
+  {
+    "Start": 30,
+    "End": 40,
+    "Value": "Greensboro"
+  },
+  {
+    "Start": 97,
+    "End": 104,
+    "Value": "Vallejo"
+  },
+  {
+    "Start": 152,
+    "End": 158,
+    "Value": "Prague"
+  },
+  {
+    "Start": 204,
+    "End": 214,
+    "Value": "Louisville"
+  },
+  {
+    "Start": 268,
+    "End": 274,
+    "Value": "Denver"
+  }
+]

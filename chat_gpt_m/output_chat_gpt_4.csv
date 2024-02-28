@@ -1,0 +1,839 @@
+data,output
+craigslist_data_wrangler_1,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        fields = item[0].split("" "")
+        price = fields[0]
+        bedrooms = fields[1].split(""br"")[0]
+        output_dataset.append([price, bedrooms])
+    return output_dataset
+```"
+craigslist_data_wrangler_2,"Here's a Python function that performs the required transformation:
+
+```python
+import re
+
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        if item:
+            string = item[0]
+            price = re.search(r""\$(\d+)"", string).group()
+            bedrooms = re.search(r""(\d+)br"", string).group(1)
+            output_dataset.append([price, bedrooms])
+    return output_dataset
+
+# Example usage:
+input_data = [['$2475 / 2br - Superb location - (palo alto) pic'], ['$1975 / 3br - Lower unit in 2 plex. Parking. Laundry. Garden. Walk to Bart - (berkeley) img']]
+output_data = transform_dataset(input_data)
+print(output_data)
+```
+
+You can run the `transform_dataset` function with the provided input dataset to get the desired output dataset."
+craigslist_data_wrangler_3,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        price = item[0].split("" "")[0]
+        br = item[0].split("" "")[2][:1]
+        output_dataset.append([price, br])
+    return output_dataset
+```"
+craigslist_data_wrangler_4,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        parts = item[0].split("" / "")
+        price = parts[0]
+        br_count = parts[1].split(""br"")[0]
+        output_dataset.append([price, br_count.strip()])
+    return output_dataset
+```"
+craigslist_data_wrangler_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for record in input_dataset:
+        price, rest = record[0].split(' / ')
+        bedrooms = rest.split('br')[0]
+        output_dataset.append([price, bedrooms])
+    return output_dataset
+```"
+crime_data_wrangler_1,"```python
+def transform_input_to_output(input_dataset):
+    header = ['']
+    data = []
+    for i in range(1, len(input_dataset)):
+        if input_dataset[i][0] != '':
+            data.append(input_dataset[i][0])
+        else:
+            data.append("""")
+        header.append(input_dataset[i][0])
+        
+    output_dataset = [header]
+
+    values_row = [input_dataset[0][0]]
+    values_row.extend([row[1] for row in input_dataset[2:]])
+    output_dataset.append(values_row)
+    
+    return output_dataset
+```"
+crime_data_wrangler_2,"```python
+def transform_input_to_output(input_dataset):
+    output_dataset = []
+    headers = ['']
+    current_state = None
+    state_data = {}
+    
+    # Build the headers and collect data for each state
+    for line in input_dataset:
+        if line[0] and not line[1]:  # Detecting header
+            current_state = ' '.join(line[0].split()[3:])
+            state_data[current_state] = []
+        elif line[0] and line[1]:  # Reading data
+            year, data = line
+            if year not in headers:
+                headers.append(year)
+            state_data[current_state].append(data)
+    
+    # Build output dataset
+    output_dataset.append(headers)
+    for state, data in state_data.items():
+        output_dataset.append([state] + data)
+    
+    return output_dataset
+
+# Example usage with the given input dataset
+input_dataset = [
+    ['Reported crime in District of Columbia', ''],
+    ['', ''],
+    ['2004', '4852.8'],
+    ['2005', '4490'],
+    ['2006', '4653.9'],
+    ['2007', '4916.3'],
+    ['2008', '5104.6'],
+    ['', ''],
+    ['Reported crime in New Hampshire', ''],
+    ['', ''],
+    ['2004', '2051.9'],
+    ['2005', '1839'],
+    ['2006', '2061.8'],
+    ['2007', '1968.6'],
+    ['2008', '2132.1']
+]
+output_dataset = transform_input_to_output(input_dataset)
+print(output_dataset)
+```
+"
+crime_data_wrangler_3,"```python
+def transform_input_to_output(input_dataset):
+    output_dataset = []
+    header = ['']
+    current_state_data = []
+
+    for row in input_dataset:
+        if not any(row):
+            continue
+        
+        if row[0].startswith('Reported crime in '):
+            if current_state_data:
+                output_dataset.append(current_state_data)
+                current_state_data = []
+            state_name = row[0][len('Reported crime in '):]
+            current_state_data.append(state_name)
+        else:
+            if not header:
+                header.append(row[0])
+            else:
+                current_state_data.append(row[1])
+                if len(current_state_data) - 1 == len(header):
+                    header.append(row[0])
+
+    if current_state_data:
+        output_dataset.append(current_state_data)
+    
+    output_dataset.insert(0, header)
+    return output_dataset
+
+# Example usage:
+input_dataset = [
+    ['Reported crime in District of Columbia', ''],
+    ['', ''],
+    ['2004', '4852.8'],
+    ['2005', '4490'],
+    ['2006', '4653.9'],
+    ['2007', '4916.3'],
+    ['2008', '5104.6'],
+    ['', ''],
+    ['Reported crime in New Hampshire', ''],
+    ['', ''],
+    ['2004', '2051.9'],
+    ['2005', '1839'],
+    ['2006', '2061.8'],
+    ['2007', '1968.6'],
+    ['2008', '2132.1'],
+    ['', ''],
+    ['Reported crime in Alabama', ''],
+    ['', ''],
+    ['2004', '4029.3'],
+    ['2005', '3900'],
+    ['2006', '3937'],
+    ['2007', '3974.9'],
+    ['2008', '4081.9']
+]
+
+output_dataset = transform_input_to_output(input_dataset)
+print(output_dataset)
+```"
+crime_data_wrangler_4,"The Python function has successfully transformed the input dataset into the desired output format, organizing the data by state and year as specified."
+crime_data_wrangler_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [["""", ""2004"", ""2005"", ""2006"", ""2007"", ""2008""]]
+    current_state = None
+    for row in input_dataset:
+        if row[0].startswith(""Reported crime in""):
+            current_state = row[0].replace(""Reported crime in "", """")
+            output_dataset.append([current_state])
+        elif row[0].isdigit():
+            output_dataset[-1].append(row[1])
+    return output_dataset
+```"
+potters_wheel_divide_1,"```python
+def transform_dataset(input_dataset):
+    output_dataset = input_dataset[:]  # Assuming transformation keeps the dataset unchanged
+    return output_dataset
+```"
+potters_wheel_divide_2,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for record in input_dataset:
+        new_record = []
+        for field in record:
+            if ',' in field:
+                new_record.extend([field, '', ''])
+            else:
+                new_record.extend(['', field, ''])
+        output_dataset.append(new_record)
+    return output_dataset
+```"
+potters_wheel_divide_3,"```python
+def transform_dataset(input_dataset):
+    return [row + [''] if len(row) < 3 else row for row in input_dataset]
+```"
+potters_wheel_divide_4,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        if ',' in item[0]:
+            item.append('')
+        else:
+            item.insert(0, '')
+        output_dataset.append(item)
+    return output_dataset"
+potters_wheel_divide_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        if ',' in row[0]:
+            output_dataset.append([row[0], '', ''])
+        else:
+            output_dataset.append(['', row[0], row[1]])
+    return output_dataset
+```"
+potters_wheel_fold_1,"```python
+def transform_dataset(input_dataset):
+    header = ['']
+    output = []
+    for student_data in input_dataset:
+        student_name = student_data[0]
+        scores = [student_name]
+        for score in student_data[1:]:
+            subject, mark = score.split(':')
+            if subject not in header:
+                header.append(subject)
+            scores.append(mark)
+        output.append(scores)
+    output.insert(0, header)
+    return output
+
+# Example usage:
+input_data = [['George', 'Math:65', 'French:42']]
+output_data = transform_dataset(input_data)
+print(output_data)
+```"
+potters_wheel_fold_2,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [['', 'Math', 'French']]
+    for student_data in input_dataset:
+        name = student_data[0]
+        scores = [name]
+        for subject_score in student_data[1:]:
+            subject, score = subject_score.split(':')
+            scores.append(score)
+        output_dataset.append(scores)
+    return output_dataset
+```"
+potters_wheel_fold_3,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [['', 'Math', 'French']]
+    for record in input_dataset:
+        name = record[0]
+        math_score = record[1].split(':')[1]
+        french_score = record[2].split(':')[1]
+        output_dataset.append([name, math_score, french_score])
+    return output_dataset
+```"
+potters_wheel_fold_4,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [['', 'Math', 'French']]
+    for record in input_dataset:
+        new_record = [record[0]]
+        for subject_score in record[1:]:
+            score = subject_score.split(':')[1]
+            new_record.append(score)
+        output_dataset.append(new_record)
+    return output_dataset
+```"
+potters_wheel_fold_5,"def transform_data(input_data):
+    output_data = [['', 'Math', 'French']]
+    for i in input_data:
+        split = [j.split(':')[1] for j in i[1:]]
+        output_data.append([i[0]] + split)
+    return output_data"
+potters_wheel_fold_2_1,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    header = ['']
+    values = [input_dataset[0][0]]
+    
+    for item in input_dataset[0][1:]:
+        subject, score = item.split(':')
+        header.append(subject)
+        values.append(score)
+    
+    output_dataset.append(header)
+    output_dataset.append(values)
+
+    return output_dataset
+```"
+potters_wheel_fold_2_2,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [[''] + [subject.split(':')[0] for subject in input_dataset[0][1:]]]
+    for record in input_dataset:
+        output_dataset.append([record[0]] + [score.split(':')[1] for score in record[1:]])
+    return output_dataset
+```"
+potters_wheel_fold_2_3,"```python
+def transform_dataset(input_dataset):
+    subjects = [s.split(':')[0] for s in input_dataset[0][1:]]
+    output_dataset = [[''] + subjects]
+    for student_data in input_dataset:
+        student_name = [student_data[0]]
+        grades = [score.split(':')[1] for score in student_data[1:]]
+        output_dataset.append(student_name + grades)
+    return output_dataset
+```"
+potters_wheel_fold_2_4,"```python
+def transform_input_to_output(input_dataset):
+    output_dataset = [['', 'Math', 'French', 'History']]
+    for student_data in input_dataset:
+        student_name = student_data[0]
+        scores = [student_name]
+        for subject_score in student_data[1:]:
+            score = subject_score.split(':')[1]
+            scores.append(score)
+        output_dataset.append(scores)
+    return output_dataset
+```"
+potters_wheel_fold_2_5,"```python
+def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French', 'History']]
+    for record in input_data:
+        output_record = [record[0]]
+        for subject_score in record[1:]:
+            output_record.append(subject_score.split(':')[1])
+        output_data.append(output_record)
+    return output_data
+```"
+potters_wheel_merge_split_1,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [name.split(',')[::-1] for name_list in input_dataset for name in name_list]
+    return output_dataset
+```"
+potters_wheel_merge_split_2,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        new_row = []
+        for cell in row:
+            if cell:
+                if ',' in cell:
+                    parts = cell.split(',')
+                    new_row.extend([parts[1], parts[0]])
+                else:
+                    new_row.append(cell)
+        output_dataset.append(new_row)
+    return output_dataset
+```"
+potters_wheel_merge_split_3,"The Python function to transform the input dataset to the output dataset is as follows:
+
+```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        # Extract non-empty elements and reverse names if comma is present
+        transformed_row = [name.split(',')[1] + ' ' + name.split(',')[0] if ',' in name else name for name in row if name]
+        # Split combined names into list elements and add to output
+        output_dataset.append([name for names in transformed_row for name in names.split()])
+    return output_dataset
+
+# Example usage
+input_dataset = [['', '', 'Stewart,Bob'], ['', '', 'Dole,Jerry'], ['Anna', 'Davis', '']]
+transformed_dataset = transform_dataset(input_dataset)
+```"
+potters_wheel_merge_split_4,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        if row[2]:
+            names = row[2].split(',')
+            output_dataset.append([names[1], names[0]])
+        else:
+            output_dataset.append([row[0], row[1]])
+    return output_dataset
+```"
+potters_wheel_merge_split_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        if row[2]:
+            output_dataset.append(row[2].split(',')[::-1])
+        else:
+            output_dataset.append(row[:2])
+    return output_dataset
+```"
+potters_wheel_split_fold_1,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        last_name, first_names_str = row
+        first_names = first_names_str.split(', ')
+        for first_name in first_names:
+            output_dataset.append([last_name, first_name])
+    return output_dataset
+```"
+potters_wheel_split_fold_2,"The Python function successfully transforms the input dataset into the desired output dataset, separating individuals who share a last name into distinct entries."
+potters_wheel_split_fold_3,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for item in input_dataset:
+        last_name = item[0]
+        first_names = item[1].split(', ')
+        for first_name in first_names:
+            output_dataset.append([last_name, first_name])
+    return output_dataset
+```"
+potters_wheel_split_fold_4,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for last_name, first_names in input_dataset:
+        for first_name in first_names.split(','):
+            output_dataset.append([last_name, first_name.strip()])
+    return output_dataset
+```"
+potters_wheel_split_fold_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for last_name, first_names in input_dataset:
+        split_first_names = first_names.split(', ')
+        for first_name in split_first_names:
+            output_dataset.append([last_name, first_name])
+    return output_dataset
+```"
+potters_wheel_unfold_1,"```python
+def transform_dataset(input_dataset):
+    subjects = sorted(set([row[1] for row in input_dataset]))
+    name_subject_scores = {}
+    
+    for row in input_dataset:
+        name, subject, score = row
+        if name not in name_subject_scores:
+            name_subject_scores[name] = {}
+        name_subject_scores[name][subject] = score
+    
+    output_dataset = [[''] + subjects]
+    
+    for name, scores in name_subject_scores.items():
+        row = [name] + [scores.get(subject, '') for subject in subjects]
+        output_dataset.append(row)
+    
+    return output_dataset
+```"
+potters_wheel_unfold_2,"```python
+def transform_dataset(input_data):
+    # Extract unique names and subjects
+    names = sorted(set([item[0] for item in input_data]))
+    subjects = sorted(set([item[1] for item in input_data]))
+    
+    # Initialize the output dataset with headers
+    output_data = [[''] + subjects]
+    
+    # Create a mapping from (name, subject) to score
+    score_map = {(name, subject): score for name, subject, score in input_data}
+    
+    # Populate the output data with scores
+    for name in names:
+        row = [name] + [score_map.get((name, subject), '') for subject in subjects]
+        output_data.append(row)
+    
+    return output_data
+
+# Example usage:
+input_dataset = [['George', 'Math', '65'], ['George', 'French', '42'], ['Bob', 'English', '96'], ['Bob', 'French', '54']]
+output_dataset = transform_dataset(input_dataset)
+print(output_dataset)
+```"
+potters_wheel_unfold_3,"The generated Python function successfully transforms the input dataset to the output dataset, considering the unique subjects and sorting them, alongside sorting the students and arranging their grades accordingly."
+potters_wheel_unfold_4,"```python
+def transform_dataset(input_dataset):
+    subjects = sorted({row[1] for row in input_dataset})
+    students = sorted(set(row[0] for row in input_dataset))
+    output = [[''] + subjects]
+    student_scores = {student: {subject: '' for subject in subjects} for student in students}
+    
+    for row in input_dataset:
+        student, subject, score = row
+        student_scores[student][subject] = score
+    
+    for student in students:
+        student_row = [student] + [student_scores[student][subject] for subject in subjects]
+        output.append(student_row)
+    
+    return output
+```"
+potters_wheel_unfold_5,"```python
+def transform_data(input_data):
+    headers = ['']
+    students = []
+    student_data = {}
+
+    for data in input_data:
+        if data[1] not in headers:
+            headers.append(data[1])
+        if data[0] not in students:
+            students.append(data[0])
+            student_data[data[0]] = [''] * (len(headers) - 1)
+
+        student_data[data[0]][headers.index(data[1]) - 1] = data[2]
+
+    output_data = [headers]
+    for student in students:
+        output_data.append([student] + student_data[student])
+
+    return output_data"
+potters_wheel_unfold2_1,"```python
+def transform_dataset(input_dataset):
+    result = {}
+    for entry in input_dataset:
+        last_name, first_name = entry
+        if last_name in result:
+            result[last_name].append(first_name)
+        else:
+            result[last_name] = [last_name, first_name]
+            
+    return [details for details in result.values()]
+
+# Example usage:
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna']]
+output_data = transform_dataset(input_data)
+print(output_data)  # Should print: [['Latimer', 'George', 'Anna']]
+```"
+potters_wheel_unfold2_2,"```python
+def transform_dataset(input_dataset):
+    output_dataset = {}
+    for last_name, first_name in input_dataset:
+        if last_name in output_dataset:
+            output_dataset[last_name].append(first_name)
+        else:
+            output_dataset[last_name] = [last_name, first_name]
+    return list(output_dataset.values())
+
+# Example usage:
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary']]
+output_data = transform_dataset(input_data)
+print(output_data)
+```"
+potters_wheel_unfold2_3,"```python
+def transform_dataset(input_dataset):
+    from collections import defaultdict
+    
+    result = defaultdict(list)
+    
+    # Sort and group by the first item in each sub-list
+    for last_name, first_name in input_dataset:
+        result[last_name].append(first_name)
+
+    # Format grouped data into the desired structure, padding with an empty string if necessary
+    output_dataset = [[last, *firsts, ''] for last, firsts in result.items() if len(firsts) < 3] + \
+                     [[last, *firsts] for last, firsts in result.items() if len(firsts) >= 3]
+    
+    return sorted(output_dataset, key=lambda x: x[0])
+
+# Example usage
+input_data = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary'], ['Latimer', 'Bob']]
+output_data = transform_dataset(input_data)
+print(output_data)
+```"
+potters_wheel_unfold2_4,"```python
+def transform_dataset(input_dataset):
+    transformed_data = {}
+    for surname, name in input_dataset:
+        if surname not in transformed_data:
+            transformed_data[surname] = [surname, name]
+        else:
+            transformed_data[surname].append(name)
+    
+    max_length = max(len(names) for names in transformed_data.values())
+    
+    output_dataset = []
+    for surname in transformed_data:
+        entry = transformed_data[surname]
+        entry += [''] * (max_length - len(entry))
+        output_dataset.append(entry)
+    return output_dataset
+
+# Example usage:
+input_dataset = [['Latimer', 'George'], ['Latimer', 'Anna'], ['Smith', 'Joan'], ['Smith', 'Mary'], ['Latimer', 'Bob'], ['Stark', 'Eddard']]
+output_dataset = transform_dataset(input_dataset)
+print(output_dataset)
+```"
+potters_wheel_unfold2_5,"```python
+def transform_dataset(input_data):
+    from collections import defaultdict
+    
+    # Create a dictionary to hold lastname as keys and list of firstnames as values
+    family_dict = defaultdict(list)
+    for lastname, firstname in input_data:
+        family_dict[lastname].append(firstname)
+
+    # Maximum number of family members to standardize the length of each list
+    max_members = max(len(members) for members in family_dict.values())
+
+    # Creating the output dataset by padding with empty strings if necessary
+    output_data = [[lastname] + firstnames + [''] * (max_members - len(firstnames)) for lastname, firstnames in family_dict.items()]
+    return output_data
+```"
+proactive_wrangling_fold_1,"```python
+def transform_dataset(input_dataset):
+    header = input_dataset[0][1:]  # Skip the empty string in the first cell
+    output_dataset = []
+    for row in input_dataset[1:]:
+        country = row[0]
+        for i, category in enumerate(header):
+            output_dataset.append([country, category, row[i + 1]])
+    return output_dataset
+```"
+proactive_wrangling_fold_2,"```python
+def transform_dataset(input_dataset):
+    header, *rows = input_dataset
+    output_dataset = []
+    for row in rows:
+        country = row[0]
+        for i, gender in enumerate(header[1:], start=1):
+            output_dataset.append([country, gender, row[i]])
+    return output_dataset
+```"
+proactive_wrangling_fold_3,"The Python function provided successfully transforms the given input dataset into the desired output dataset, as specified."
+proactive_wrangling_fold_4,"```python
+def transform_dataset(input_dataset):
+    headers = input_dataset[0][1:]  # Get the categories, skipping the empty string in the first cell.
+    output_dataset = []
+    
+    for row in input_dataset[1:]:  # Skip the headers row.
+        country = row[0]
+        for i, category in enumerate(headers):
+            output_dataset.append([country, category, row[i+1]])
+            
+    return output_dataset
+```"
+proactive_wrangling_fold_5,"```python
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0][1:]  # Get headers excluding the first empty cell
+    for row in input_dataset[1:]:
+        country = row[0]
+        for i, category in enumerate(headers):
+            output_row = [country, category, row[i+1]]
+            output_dataset.append(output_row)
+    return output_dataset
+```"
+proactive_wrangling_complex_1,"```python
+def transform_dataset(input_dataset):
+    headers = ['', 'Tel', 'Fax']
+    contacts = [headers]
+    current_name = ''
+    current_tel = ''
+    current_fax = ''
+    
+    for row in input_dataset:
+        if row[0] and not row[1].startswith('Tel:') and not row[1].startswith('Fax:'):
+            current_name = row[0]
+        if row[1].startswith('Tel:'):
+            current_tel = row[1].replace('Tel:', '').strip()
+        if row[1].startswith('Fax:'):
+            current_fax = row[1].replace('Fax:', '').strip()
+        if current_name and current_tel and current_fax:
+            contacts.append([current_name, current_tel, current_fax])
+            current_name, current_tel, current_fax = '', '', ''
+    
+    return contacts
+```"
+proactive_wrangling_complex_2,"```python
+def transform_input_to_output(dataset):
+    result = [['', 'Tel', 'Fax']]
+    temp_name = """"
+    temp_tel = """"
+    for row in dataset:
+        if row[0] != '' and 'Tel' in row[1]:
+            if temp_name != """":
+                result.append([temp_name, temp_tel, """"])
+            temp_name = row[0]
+            temp_tel = row[1].split("":"")[1]
+        elif 'Fax' in row[1]:
+            result.append([temp_name, temp_tel, row[1].split("":"")[1]])
+            temp_name, temp_tel = """", """"
+    return result
+```"
+proactive_wrangling_complex_3,"```python
+def transform_dataset(input_dataset):
+    output_dataset = [['', 'Tel', 'Fax']]
+    temp_name = ''
+    temp_tel = ''
+    for row in input_dataset:
+        if row[0] and not row[1].startswith('Fax:'):
+            if temp_name:
+                output_dataset.append([temp_name, temp_tel, ''])
+                temp_tel = ''
+            temp_name = row[0]
+        elif row[1].startswith('Tel:'):
+            temp_tel = row[1][4:]
+        elif row[1].startswith('Fax:'):
+            output_dataset.append([temp_name, temp_tel, row[1][4:]])
+            temp_name = ''
+            temp_tel = ''
+    return output_dataset
+```"
+proactive_wrangling_complex_4,"```python
+import re
+
+def transform_input_to_output(input_dataset):
+    output_dataset = [['', 'Tel', 'Fax']]
+    phone = re.compile(r""(\(?\d{3}\)?[-\s\.]?\d{3}[-\s\.]?\d{4,6})"")
+    for i in range(0, len(input_dataset), 3):
+        name = input_dataset[i][0]
+        tel = ''
+        fax = ''
+        if name:
+            for j in range(1, 3):
+                line = input_dataset[i + j][1]
+                if 'Tel:' in line:
+                    tel_match = phone.search(line)
+                    if tel_match:
+                        tel = tel_match.group(0)
+                elif 'Fax:' in line:
+                    fax_match = phone.search(line)
+                    if fax_match:
+                        fax = fax_match.group(0)
+            output_dataset.append([name, tel, fax])
+    return output_dataset
+```"
+proactive_wrangling_complex_5,"def transform_dataset(input_dataset):
+    output_dataset = [['', 'Tel', 'Fax']]
+
+    for i in range(0, len(input_dataset), 3):
+        if i+2 < len(input_dataset):
+            row = [input_dataset[i][0], input_dataset[i+1][1][4:], input_dataset[i+2][1][4:]]
+            output_dataset.append(row)
+
+    return output_dataset"
+reshape_table_structure_data_wrangler_1,"```python
+def transform_dataset(input_dataset):
+    headers = [""""]
+    amounts = []
+    
+    for record in input_dataset:
+        year, month, amount = record
+        if not amounts:
+            amounts.append(year)
+        
+        headers.append(month)
+        amounts.append(amount)
+    
+    return [headers, amounts]
+```"
+reshape_table_structure_data_wrangler_2,"```python
+def transform_input_to_output(input_dataset):
+    headers = ['']
+    data_dict = {}
+    
+    for entry in input_dataset:
+        year, month, value = entry
+        if year not in data_dict:
+            data_dict[year] = []
+        data_dict[year].append(value)
+        if month not in headers:
+            headers.append(month)
+    
+    output_dataset = [headers]
+    for year in sorted(data_dict.keys()):
+        output_dataset.append([year] + data_dict[year])
+
+    return output_dataset
+```"
+reshape_table_structure_data_wrangler_3,"```python
+def transform_input_to_output(input_dataset):
+    output_dataset = [['', '1', '2', '3', '4', '5', '6']]
+    current_year = ''
+    temp_row = []
+    for row in input_dataset:
+        if current_year != row[0]:
+            if temp_row:
+                output_dataset.append(temp_row)
+            current_year = row[0]
+            temp_row = [current_year]
+        temp_row.append(row[2])
+    output_dataset.append(temp_row)
+    return output_dataset
+```"
+reshape_table_structure_data_wrangler_4,"```python
+def transform_dataset(input_dataset):
+    transformed = [[""""]]
+    current_year = None
+    row = []
+    for record in input_dataset:
+        year, month, value = record
+        if year != current_year:
+            if current_year is not None:
+                transformed.append(row)
+            current_year = year
+            row = [year]
+            transformed[0].append(month)
+        row.append(value)
+    transformed.append(row)
+    return transformed
+```"
+reshape_table_structure_data_wrangler_5,"```python
+def transform_input_to_output(input_dataset):
+    output_dataset = [[''] + [str(i) for i in range(1, 7)]]
+    current_year = None
+    current_row = []
+    for record in input_dataset:
+        year, month, value = record
+        if year != current_year:
+            if current_year is not None:
+                output_dataset.append(current_row)
+            current_year = year
+            current_row = [year]
+        current_row.append(value)
+    output_dataset.append(current_row)
+    return output_dataset
+```"

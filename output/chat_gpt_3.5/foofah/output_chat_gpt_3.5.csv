@@ -1,0 +1,2561 @@
+data,output
+2_1,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset:
+        new_row = []
+        for item in row:
+            if item != '':
+                new_row.append(item)
+        output_dataset.append(new_row)
+    return output_dataset"
+2_2,"def transform_dataset(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 2):
+        row1 = input_data[i]
+        row2 = input_data[i + 1]
+        non_empty_values = [value if value != "" else row2[index] for index, value in enumerate(row1)]
+        output_data.append(non_empty_values)
+    return output_data"
+2_3,"def transform_dataset(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 2):
+        row1 = input_data[i]
+        row2 = input_data[i + 1]
+        non_empty_values = [value if value != "" else row2[index] for index, value in enumerate(row1)]
+        output_data.append(non_empty_values)
+    return output_data"
+2_4,"def transform_dataset(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 2):
+        row1 = input_data[i]
+        row2 = input_data[i + 1]
+        non_empty_values = [value if value != "" else row2[index] for index, value in enumerate(row1)]
+        output_data.append(non_empty_values)
+    return output_data"
+2_5,def transform_dataset(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 2):
+        row1 = input_data[i]
+        row2 = input_data[i + 1]
+        non_empty_values = [value if value != "" else row2[index] for index, value in enumerate(row1)]
+        output_data.append(non_empty_values)
+    return output_data"
+3_1,"def transform_dataset(input_data):
+    output_data = []
+    current_values = []
+    for row in input_data:
+        if row[0] != "":
+            current_values = [row[0], row[1]]
+        else:
+            current_values += [value if value != "" else current_values[-1] for value in row[1:]]
+            output_data.append(current_values)
+    return output_data"
+3_2,"def transform_dataset(input_data):
+    output_data = []
+    current_values = []
+    for row in input_data:
+        if row[0] != "":
+            current_values = [row[0], row[1]]
+        else:
+            current_values += [value if value != "" else current_values[-1] for value in row[1:]]
+            output_data.append(current_values)
+    return output_data"
+3_3,"def transform_dataset(input_data):
+    output_data = []
+    current_values = []
+    for row in input_data:
+        if row[0] != "":
+            current_values = [row[0]]
+        non_empty_values = [value if value != "" else current_values[index] for index, value in enumerate(row)]
+        output_data.append(current_values + non_empty_values[1:])
+    return output_data"
+3_4,"def transform_dataset(input_data):
+    output_data = []
+    current_values = []
+    for row in input_data:
+        if row[0] != "":
+            current_values = [row[0], row[1]]
+        else:
+            current_values += [value if value != "" else current_values[-1] for value in row[1:]]
+            output_data.append(current_values)
+    return output_data"
+3_5,"def transform_dataset(input_dataset):
+    output_dataset = []
+    current_row = []
+    for row in input_dataset:
+        if row[0] != '':
+            current_row.append(row[0])
+        if row[1] != '':
+            current_row.append(row[1])
+        if len(current_row) == 4:
+            output_dataset.append(current_row)
+            current_row = []
+    return output_dataset"
+4_1,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        output_dataset.append([data[0], data[1]])
+        output_dataset.append([data[0], data[2]])
+    return output_dataset"
+4_2,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        car_make = row[0]
+        color_or_year = row[1:]
+        for value in color_or_year:
+            output_data.append([car_make, value])
+    return output_data"
+4_3,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        car = data[0]
+        color = data[1]
+        output_dataset.append([car, color])
+        output_dataset.append([car, data[2]])
+    return output_dataset"
+4_4,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        car_make = row[0]
+        color_or_year = row[1:]
+        for value in color_or_year:
+            output_data.append([car_make, value])
+    return output_data"
+4_5,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        car_make = row[0]
+        color_or_year = row[1:]
+        for value in color_or_year:
+            output_data.append([car_make, value])
+    return output_data"
+5_1,"def transform_dataset(input_data):
+    output_data = []
+    task_names = input_data[0][1:]
+    for i in range(1, len(input_data[1])):
+        task_values = [input_data[0][0], input_data[1][i]]
+        output_data.append(task_values)
+    return output_data"
+5_2,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(1, len(input_dataset[0])):
+        for j in range(1, len(input_dataset)):
+            output_dataset.append([input_dataset[j][0], input_dataset[j][i]])
+    return output_dataset"
+5_3,"def transform_dataset(input_data):
+    output_data = []
+    task_names = input_data[0][1:]
+    for i in range(1, len(input_data[1])):
+        for j in range(1, len(input_data)):
+            if input_data[j][i] != "":
+                task_values = [input_data[j][0], input_data[j][i]]
+                output_data.append(task_values)
+    return output_data"
+5_4,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(1, len(row)):
+            output_dataset.append([row[0], row[i]])
+    return output_dataset"
+5_5,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(1, len(row)):
+            output_dataset.append([row[0], row[i]])
+    return output_dataset"
+6_1,"def transform_dataset(input_data):
+    output_data = []
+    dates = input_data[0][1:]
+    product_name = input_data[2][0]
+    for i in range(1, len(input_data[2])):
+        date_value = [dates[i-1], product_name, input_data[2][i]]
+        output_data.append(date_value)
+    return output_data"
+6_2,"def transform_dataset(input_data):
+    output_data = []
+    dates = input_data[0][1:]
+    for i in range(1, len(input_data)):
+        product_name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            date_value = [dates[j-1], product_name, input_data[i][j]]
+            output_data.append(date_value)
+    return output_data"
+6_3,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(2, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[0][j], input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset"
+6_4,"def transform_dataset(input_data):
+    output_data = []
+    dates = input_data[0][1:]
+    for i in range(1, len(input_data)):
+        product_name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            date_value = [dates[j-1], product_name, input_data[i][j]]
+            output_data.append(date_value)
+    return output_data"
+6_5,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(2, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[0][j], input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset"
+7_1,"def transform_dataset(input_dataset):
+    output_dataset = []
+    temp_list = []
+    for sublist in input_dataset:
+        for item in sublist:
+            if item != '':
+                temp_list.append(item)
+        if len(temp_list) == 9:
+            output_dataset.append(temp_list)
+        temp_list = []
+    return output_dataset"
+7_2,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 2):
+        row = input_dataset[i] + input_dataset[i+1]
+        output_dataset.append(row)
+    return output_dataset"
+7_3,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 5):
+        row = input_dataset[i] + input_dataset[i+1] + input_dataset[i+2] + input_dataset[i+3] + input_dataset[i+4]
+        output_dataset.append(row)
+    return output_dataset"
+7_4,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 5):
+        row = input_dataset[i] + input_dataset[i+1] + input_dataset[i+2] + input_dataset[i+3] + input_dataset[i+4]
+        output_dataset.append(row)
+    return output_dataset"
+7_5,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 5):
+        row = input_dataset[i] + input_dataset[i+1] + input_dataset[i+2] + input_dataset[i+3] + input_dataset[i+4]
+        output_dataset.append(row)
+    return output_dataset"
+8_1,"
+def transform_dataset(input_data):
+    output_data = []
+    header = input_data[0]
+    data = input_data[1]
+    
+    for i in range(3, len(header)):
+        output_data.append([data[0], data[1], data[2], header[i], data[i]])
+    
+    return output_data
+"
+8_2,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(3, len(row)):
+            output_dataset.append([row[0], row[1], row[2], str(i-2), row[i]])
+    return output_dataset
+"
+8_3,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(3, len(row)):
+            output_dataset.append([row[0], row[1], row[2], str(i-2), row[i]])
+    return output_dataset
+"
+8_4,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(3, len(row)):
+            output_dataset.append([row[0], row[1], row[2], str(i-2), row[i]])
+    return output_dataset"
+8_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for row in input_dataset[1:]:
+        for i in range(3, len(row)):
+            output_dataset.append([row[0], row[1], row[2], str(i-2), row[i]])
+    return output_dataset"
+10_1,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    for i in range(1, len(input_data)):
+        for j in range(1, len(input_data[i])):
+            output_data.append([input_data[i][0], input_data[i][j]])
+    return output_data"
+10_2,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset
+"
+10_3,"def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset
+"
+10_4,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset
+
+"
+10_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            output_dataset.append([input_dataset[i][0], input_dataset[i][j]])
+    return output_dataset"
+
+11_1,"def transform_dataset(input_data):
+    output_data = []
+    header = input_data[0]
+    for i in range(1, len(input_data)):
+        for j in range(1, len(header)):
+            if input_data[i][j] != '':
+                output_data.append([input_data[i][0], header[j], input_data[i][j]])
+    return output_data"
+11_2,"def transform_dataset(input_data):
+    output_data = []
+    header = input_data[0]
+    
+    for i in range(1, len(input_data)):
+        name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([name, header[j], input_data[i][j]])
+    
+    return output_data"
+11_3,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    header = input_dataset[0]
+    
+    for i in range(1, len(input_dataset)):
+        name = input_dataset[i][0]
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([name, header[j], input_dataset[i][j]])
+    
+    return output_dataset
+"
+11_4,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    header = input_dataset[0]
+    
+    for i in range(1, len(input_dataset)):
+        name = input_dataset[i][0]
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([name, header[j], input_dataset[i][j]])
+    
+    return output_dataset
+"
+11_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    header = input_dataset[0]
+    
+    for i in range(1, len(input_dataset)):
+        name = input_dataset[i][0]
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([name, header[j], input_dataset[i][j]])
+    
+    return output_dataset"
+12_1,"
+def transform_dataset(input_data):
+    output_data = [row for row in input_data if row[3] == 'x5']
+    return output_data
+
+"
+12_2,"
+def transform_dataset(input_data):
+    output_data = [row for row in input_data if row[3].startswith('x') or row[3].startswith('y')]
+    return output_data
+"
+12_3,"
+def transform_dataset(input_data):
+    output_data = [row for row in input_data if row[3].startswith('x') or row[3].startswith('y') or row[3].startswith('z')]
+    return output_data
+
+"
+12_4,"
+def transform_dataset(input_data):
+    output_data = [row for row in input_data if row[3].startswith('x') or row[3].startswith('y') or row[3].startswith('z') or row[3].startswith('c')]
+    return output_data
+
+"
+12_5,"
+def transform_dataset(input_data):
+    output_data = [row for row in input_data if row[3] != '' and row[4] != '' and row[5] != '' and row[6] != '' and row[7] != '']
+    return output_data
+
+"
+13_1,"
+def transform_dataset(input_data):
+    output_data = []
+    header = input_data[0]
+    for i in range(1, len(input_data[0])):
+        output_data.append([input_data[1][0], header[i], input_data[1][i]])
+    return output_data
+"
+13_2,"
+def transform_dataset(input_data):
+    output_data = []
+    
+    for i in range(1, len(input_data[0])):
+        for j in range(1, len(input_data)):
+            if input_data[j][i] != '':
+                output_data.append([input_data[j][0], input_data[0][i], input_data[j][i]])
+    
+    return output_data
+"
+13_3,"
+def transform_dataset(input_data):
+    output_data = []
+    
+    headers = input_data[0][1:]
+    
+    for i in range(1, len(input_data)):
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([input_data[i][0], headers[j-1], input_data[i][j]])
+    
+    return output_data
+"
+13_4,"
+def transform_dataset(input_data):
+    output_data = []
+    
+    headers = input_data[0]
+    for i in range(1, len(input_data)):
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([input_data[i][0], headers[j], input_data[i][j]])
+    
+    return output_data
+"
+13_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    headers = input_dataset[0][1:]
+    
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([input_dataset[i][0], headers[j-1], input_dataset[i][j]])
+    
+    return output_dataset
+"15_1,"def transform_data(input_data):
+    output_data = []
+    for row in input_data:
+        new_row = [row[0], row[5]]
+        output_data.append(new_row)
+    return output_data"
+15_2,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        output_row = [row[0], row[5]]
+        output_data.append(output_row)
+    
+    return output_data"
+15_3,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        new_row = [row[0]]
+        for i in range(2, len(row)):
+            if row[i] != '':
+                new_row.append(row[i])
+        output_data.append(new_row)
+    return output_data"
+15_4,"def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        new_row = [row[0]]
+        for i in range(2, len(row)):
+            new_row.append(row[i])
+        output_data.append(new_row)
+    return output_data"
+15_5,"def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for row in input_data:
+        for i in range(1, len(row)):
+            if row[i] != '':
+                temp.append(row[i])
+            else:
+                temp.append(' $-')
+        output_data.append([row[0]] + temp)
+        temp = []
+    return [output_data[0]]"
+17_1,"def transform_dataset(input_data):
+    output_data = []
+    output_data.append([input_data[0][0], input_data[0][2], input_data[0][4], input_data[0][1], input_data[0][3]])
+    output_data.append([input_data[1][0], input_data[1][2], input_data[1][4], input_data[1][1], input_data[1][3]])
+    
+    return output_data
+"
+17_2,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extract headers
+    headers = input_data[0]
+    output_data.append([headers[0], headers[2], headers[4], headers[1], headers[3]])
+    
+    # Extract data
+    for i in range(1, len(input_data)):
+        row = input_data[i]
+        output_data.append([row[0], row[2], row[4], row[1], row[3]])
+    
+    return output_data
+"
+17_3,"
+def transform_dataset(input_data):
+    output_data = []
+    
+    # Extract headers
+    headers = input_data[0]
+    output_data.append([headers[0], headers[2], headers[4], headers[1], headers[3]])
+    
+    # Extract and rearrange data rows
+    for row in input_data[1:]:
+        output_data.append([row[0], row[2], row[4], row[1], row[3]])
+    
+    return output_data
+
+"
+17_4,"
+def transform_dataset(input_data):
+    output_data = []
+    
+    # Extract headers
+    headers = input_data[0]
+    output_data.append([headers[0], headers[2], headers[4], headers[1], headers[3]])
+    
+    # Extract and rearrange data rows
+    for row in input_data[1:]:
+        output_data.append([row[0], row[2], row[4], row[1], row[3]])
+    
+    return output_data
+"
+17_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    # Extracting headers
+    headers = input_dataset[0]
+    output_dataset.append([headers[0], headers[2], headers[4], headers[1], headers[3]])
+    
+    # Extracting data rows
+    for i in range(1, len(input_dataset)):
+        data_row = input_dataset[i]
+        output_dataset.append([data_row[0], data_row[2], data_row[4], data_row[1], data_row[3]])
+    
+    return output_dataset
+"
+18_1,"def transform_dataset(input_data):
+    output_data = []
+    for i in range(1, len(input_data)):
+        output_data.append(input_data[0] + input_data[i])
+    return output_data"
+18_2,"
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for data in input_data:
+        if data[2] == '':
+            temp = data
+        else:
+            output_data.append(temp + data)
+    
+    return output_data
+"
+18_3,"
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for data in input_data:
+        if data[2] == '':
+            temp = [data[0], data[1]]
+        else:
+            temp.extend([data[0], data[1], data[2]])
+            output_data.append(temp)
+    
+    return output_data"
+
+18_4,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp = []
+    
+    for data in input_dataset:
+        if data[2] == '':
+            temp = data
+        else:
+            output_dataset.append(temp + data)
+    
+    return output_dataset
+"
+
+18_5,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp = []
+    
+    for data in input_dataset:
+        if data[2] == '':
+            temp = [data[0], data[1]]
+        else:
+            temp.extend([data[2], data[1], data[2]])
+            output_dataset.append(temp)
+    
+    return output_dataset
+"
+
+19_1,"def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        time, *values = item[0].split()
+        for value in values:
+            output_data.append([time, value])
+    return output_data
+"
+19_2,"def transform_dataset(input_data):
+    output_data = []
+    for data in input_data:
+        time, *values = data[0].split()
+        for value in values:
+            output_data.append([time, value])
+    return output_data"
+19_3,"def transform_dataset(input_data):
+    output_data = []
+    for data in input_data:
+        time, values = data[0].split(' ', 1)
+        values = values.split()
+        for value in values:
+            output_data.append([time, value])
+    return output_data"
+19_4,"
+def transform_dataset(input_data):
+    output_data = []
+    for data in input_data:
+        time, values = data[0].split(' ', 1)
+        values = values.split()
+        for value in values:
+            output_data.append([time, value])
+    return output_data
+"
+19_5,"def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        time, values = item[0].split(' ', 1)
+        values = values.split()
+        for value in values:
+            output_data.append([time, value])
+    return output_data"
+22_1,"def transform_data(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        temp.extend(item)
+    
+    output_data.append(temp)
+    
+    return output_data
+"
+22_2,"def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    current_key = input_data[0][0]
+    
+    for item in input_data:
+        if item[0] == current_key:
+            temp.append(item[1])
+        else:
+            output_data.append([current_key] + temp)
+            temp = [item[1]]
+            current_key = item[0]
+    
+    output_data.append([current_key] + temp)
+    
+    return output_data"
+22_3,"def transform_dataset(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        key = item[0]
+        value = item[1]
+        
+        if key in temp_dict:
+            temp_dict[key].append(value)
+        else:
+            temp_dict[key] = [value]
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data"
+22_4,"
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp = []
+    current_key = input_dataset[0][0]
+    
+    for item in input_dataset:
+        if item[0] == current_key:
+            temp.append(item[1])
+        else:
+            output_dataset.append([current_key] + temp)
+            current_key = item[0]
+            temp = [item[1]]
+    
+    output_dataset.append([current_key] + temp)
+    
+    return output_dataset
+"
+22_5,"def transform_dataset(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        key = item[0]
+        value = item[1]
+        
+        if key in temp_dict:
+            temp_dict[key].append(value)
+        else:
+            temp_dict[key] = [value]
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data"
+
+24_1,"def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        output_data.extend(item)
+    return [output_data]
+"
+24_2,"def transform_data(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [item[0]]
+        else:
+            temp.append(item[0])
+    
+    if temp:
+        output_data.append(temp)
+    
+    return output_data"
+24_3,"
+def transform_data(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [item[0]]
+        else:
+            temp.append(item[0])
+    
+    output_data.append(temp)
+    
+    return output_data
+
+"
+24_4,"def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [item[0]]
+        else:
+            temp.append(item[0])
+    
+    output_data.append(temp)
+    
+    return output_data
+"
+24_5,"
+def transform_data(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [item[0]]
+        else:
+            temp.append(item[0])
+    
+    output_data.append(temp)
+    
+    return output_data
+"
+26_1,"def transform_data(input_data):
+    output_data = [input_data[0] + input_data[1] + input_data[2] + input_data[3]]
+    return output_data
+
+"
+26_2,"def transform_data(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data
+"
+26_3,"def transform_data(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data
+)"
+26_4,"def transform_dataset(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data
+"
+26_5,"def transform_dataset(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data
+"
+27_1,"def transform_data(input_data):
+    output_data = input_data
+    return output_data
+"
+27_2,"def transform(input_data):
+    output_data = []
+    for sublist in input_data:
+        output_data.extend(sublist)
+    return [output_data]
+"
+27_3,"def transform(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]"
+27_4,"def transform_dataset(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]"
+27_5,"def transform_dataset(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]"
+28_1,"  
+def transform_data(input_data):
+    output_data = []
+    for i in range(len(input_data[0])):
+        temp = []
+        for j in range(len(input_data)):
+            temp.append(input_data[j][i])
+        output_data.append(temp)
+    return output_data"
+28_2,"  
+def transform_data(input_data):
+    output_data = []
+    for i in range(len(input_data[0])):
+        output_data.append([input_data[0][i], input_data[1][i], input_data[2][i]])
+    return output_data"
+28_3,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 2):
+        output_dataset.append([input_dataset[i][0], input_dataset[i+1][0], input_dataset[i][1]])
+        output_dataset.append([input_dataset[i][1], input_dataset[i+1][1], input_dataset[i+1][1]])
+    return output_dataset
+
+"
+28_4,"  
+def transform_data(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 2):
+        output_data.append([input_data[i][0], input_data[i+1][0], input_data[i][1]])
+        output_data.append([input_data[i][1], input_data[i+1][1], input_data[i+1][0]])
+    return output_data
+"
+28_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(0, len(input_dataset), 2):
+        output_dataset.append([input_dataset[i][0], input_dataset[i+1][0], input_dataset[i][1]])
+        output_dataset.append([input_dataset[i][1], input_dataset[i+1][1], input_dataset[i+1][1]])
+    return output_dataset
+
+"
+29_1,"  
+def transform_dataset(input_data):
+    output_data = []
+    for i in range(1, len(input_data[0])):
+        for j in range(len(input_data)):
+            if input_data[j][i] != '':
+                output_data.append(input_data[j][0])
+                output_data.append(input_data[j][i].replace(',', ''))
+    return [output_data]
+
+"
+29_2,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    for i in range(0, len(input_dataset), 2):
+        temp = [input_dataset[i][0]]
+        for j in range(1, len(input_dataset[i])):
+            temp.append(input_dataset[i][j])
+            temp.append(input_dataset[i+1][j])
+        output_dataset.append(temp)
+    
+    return output_dataset
+"
+29_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    
+    for i in range(0, len(input_data), 4):
+        temp = [input_data[i][0]]
+        for j in range(1, len(input_data[i])):
+            temp.append(input_data[i][j])
+            temp.append(input_data[i+1][j])
+        output_data.append(temp)
+    
+    return output_data
+"
+29_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    
+    for i in range(0, len(input_data), 2):
+        temp = [input_data[i][0]]
+        for j in range(1, len(input_data[i])):
+            temp.append(input_data[i][j])
+            temp.append(input_data[i+1][j])
+        output_data.append(temp)
+    
+    return output_data
+
+"
+29_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    for i in range(0, len(input_data), 4):
+        temp = [input_data[i][0]]
+        for j in range(1, len(input_data[i])):
+            temp.extend([input_data[i][j], input_data[i+1][j]])
+        output_data.append(temp)
+    return output_data
+ "
+30_1,"def transform_dataset(input_data):
+    output_data = [[], []]
+    
+    for i in range(len(input_data)):
+        output_data[0].append(input_data[i][1] + input_data[i][2])
+        output_data[1].append(input_data[i][0])
+        output_data[1].append(input_data[i][3])
+    
+    return output_data"
+30_2,"  
+def transform_dataset(input_data):
+    output_data = [['', 'AAA123excel', 'BBB123access', 'CCC123powerpoint']]
+    
+    for i in range(len(input_data)):
+        if i == 0:
+            output_data.append([input_data[i][0], input_data[i][3]])
+        else:
+            if input_data[i][0] != input_data[i-1][0]:
+                output_data.append([input_data[i][0], input_data[i][3]])
+            else:
+                output_data[-1].append(input_data[i][3])
+    
+    return output_data
+"
+30_3,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    header = ['', 'AAA123excel', 'BBB123access', 'CCC123powerpoint']
+    output_dataset.append(header)
+    
+    for i in range(1, len(input_dataset)):
+        row = [input_dataset[i][0]]
+        for j in range(1, len(input_dataset[i])):
+            row.append(input_dataset[i][j][-1])
+        output_dataset.append(row)
+    
+    return output_dataset
+
+
+ "
+30_4,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    header = ['', 'AAA123excel', 'BBB123access', 'CCC123powerpoint']
+    output_dataset.append(header)
+    
+    temp_dict = {}
+    for data in input_dataset:
+        if data[0] not in temp_dict:
+            temp_dict[data[0]] = [data[3]]
+        else:
+            temp_dict[data[0]].append(data[3])
+    
+    for key, value in temp_dict.items():
+        row = [key] + value
+        output_dataset.append(row)
+    
+    return output_dataset
+
+ "
+30_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    header = ['', 'AAA123excel', 'BBB123access', 'CCC123powerpoint']
+    output_dataset.append(header)
+    
+    temp_dict = {}
+    for data in input_dataset:
+        if data[0] not in temp_dict:
+            temp_dict[data[0]] = [data[3]]
+        else:
+            temp_dict[data[0]].append(data[3])
+    
+    for key, value in temp_dict.items():
+        output_dataset.append([key] + value)
+    
+    return output_dataset
+ "
+33_1,"  
+def transform_data(input_data):
+    output_data = input_data
+    return output_data"
+33_2,"  
+def transform(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]
+ "
+33_3,"def transform_data(input_data):
+    output_data = [inner[0] for inner in input_data]
+    return [output_data]"
+33_4,"def transform_data(input_data):
+    output_data = [inner[0] for inner in input_data]
+    return [output_data]"
+33_5,"def transform(input_data):
+    output_data = [item[0] for item in input_data]
+    return [output_data]"
+34_1,"def transform_data(input_data):
+    output_data = input_data
+    return output_data"
+34_2,"  
+def transform_dataset(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]
+ "
+34_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        new_row = row[:6]
+        if len(row) > 6:
+            new_row.extend(row[2:])
+        else:
+            new_row.extend(['', '', '', ''])
+        output_data.append(new_row)
+    return output_data
+"
+34_4,"def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    current_id = input_data[0][0]
+    
+    for row in input_data:
+        if row[0] == current_id:
+            temp.extend(row[2:])
+        else:
+            output_data.append(temp)
+            temp = row[:2] + row[2:]
+            current_id = row[0]
+    
+    output_data.append(temp)
+    
+    return output_data
+"
+34_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    current_id = ''
+    
+    for row in input_data:
+        if row[0] != current_id:
+            if temp:
+                output_data.append(temp)
+            temp = row[:6]
+            current_id = row[0]
+        temp.extend(row[2:])
+    
+    if temp:
+        output_data.append(temp)
+    
+    return output_data
+"
+36_1,"def transform_dataset(input_data):
+    output_data = []
+    output_data.append([row[1] for row in input_data])
+    output_data.append([row[0] for row in input_data if row[0] != ''])
+    return output_data
+"
+
+36_2,"def transform_dataset(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for row in input_data:
+        if row[0] != '':
+            key = row[0]
+            temp_dict[key] = []
+        else:
+            for i in range(1, len(row)):
+                temp_dict[key].append(row[i])
+    
+    output_data.append([''] + [str(i) for i in range(len(temp_dict[key]))])
+    
+    for key, values in temp_dict.items():
+        output_data.append([key] + values)
+    
+    return output_data
+"
+
+36_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for i in range(len(input_data)):
+        if input_data[i][0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [input_data[i][0]]
+        else:
+            temp.append(input_data[i][2])
+    output_data.append(temp)
+    
+    return output_data
+"
+36_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for i in range(len(input_data)):
+        if input_data[i][0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [input_data[i][0]]
+        else:
+            temp.extend(input_data[i][1:])
+    output_data.append(temp)
+    
+    return output_data
+"
+36_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for row in input_data:
+        if row[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [row[0]]
+        temp.extend(row[1:])
+    output_data.append(temp)
+    return output_data
+"
+37_1,"def transform_data(input_data):
+    output_data = [input_data[0][0].split(',')]
+    for i in range(2, len(input_data)):
+        output_data.append([input_data[i][0]])
+    return output_data
+"
+37_2,"  
+def transform_data(input_data):
+    output_data = []
+    temp = []
+    for i in range(0, len(input_data), 11):
+        temp = input_data[i:i+11]
+        output_data.append([item[0] for item in temp])
+    
+    return output_data
+"
+37_3,"  
+def transform_data(input_data):
+    output_data = []
+    temp = []
+    for i in range(len(input_data)):
+        if input_data[i][0] != '':
+            temp.append(input_data[i][0])
+        else:
+            output_data.append(temp)
+            temp = []
+    return output_data
+"
+37_4,"  
+def transform_data(input_data):
+    output_data = [input_data[i:i+10] for i in range(0, len(input_data), 10)]
+    output_data = [sublist[0] for sublist in output_data]
+    return output_data
+
+"
+37_5,"  
+def transform_data(input_data):
+    output_data = []
+    temp = []
+    for i in range(len(input_data)):
+        if input_data[i][0] != '':
+            temp.append(input_data[i][0])
+        else:
+            output_data.append(temp)
+            temp = []
+    return output_data
+"
+40_1,"  
+def transform_data(input_data):
+    output_data = input_data
+    return output_data"
+40_2,"def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        output_data.extend(item)
+    return output_data"
+40_3,"def transform_dataset(input_data):
+    output_data = []
+    for sublist in input_data:
+        output_data.extend(sublist)
+    return output_data"
+40_4,"def transform_dataset(input_data):
+    output_data = []
+    for sublist in input_data:
+        output_data.extend(sublist)
+    return [output_data]"
+40_5,"  
+def transform_dataset(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]
+"
+41_1,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for i in range(7):
+        output_dataset.append(input_dataset[:10] + input_dataset[10 + i*3:10 + i*3 + 3] + ['RM 0908084', '26'])
+    output_dataset.append(input_dataset[:10] + ['Err:512', 'Err:512', 'Err:512', 'Err:512'])
+    return output_dataset
+"
+41_2,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    for data in input_dataset:
+        temp = data[:9]
+        output_dataset.append(temp)
+        
+    return output_dataset
+"
+41_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    for data in input_data:
+        for i in range(7):
+            temp = data[:9]
+            temp.append(data[9 + i*2])
+            temp.append(data[10 + i*2])
+            output_data.append(temp)
+    return output_data
+
+"
+41_4,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    for data in input_dataset:
+        temp = data[:9]
+        for i in range(9, len(data), 3):
+            temp.extend(data[i:i+3])
+            output_dataset.append(temp.copy())
+    
+    return output_dataset
+
+ "
+41_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    for data in input_dataset:
+        for i in range(6, len(data), 2):
+            output_dataset.append(data[:8] + data[i:i+2])
+        output_dataset.append(data[:8] + ['Err:512', 'Err:512', 'Err:512', 'Err:512'])
+    return output_dataset
+"
+43_1,"def transform_data(input_data):
+    output_data = [item[0] for item in input_data]
+    return [output_data]"
+43_2,"def transform_data(input_data):
+    output_data = []
+    temp = []
+    for item in input_data:
+        temp.append(item[0])
+        if len(temp) == 4:
+            output_data.append(temp)
+            temp = []
+    return output_data"
+43_3,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data
+"
+43_4,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+4] for i in range(0, len(input_data), 4)]
+    return output_data"
+43_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        temp.append(item[0])
+        if len(temp) == 4:
+            output_data.append(temp)
+            temp = []
+    
+    return output_data
+"
+44_1,"def transform_dataset(input_data):
+    output_data = [item[0] for item in input_data if item[0] != '']
+    return [output_data]"
+44_2,"  
+def transform_dataset(input_dataset):
+    output_dataset = [input_dataset[i:i+5] for i in range(0, len(input_dataset), 6)]
+    return output_dataset
+"
+44_3,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 6)]
+    return output_data
+
+"
+44_4,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 6)]
+    return output_data
+
+"
+44_5,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 6)]
+    return output_data
+"
+45_1,"def transform_data(input_data):
+    output_data = []
+    headers = input_data[0]
+    values = input_data[1]
+    
+    for i in range(len(headers)):
+        if values[i] != '':
+            output_data.append([values[i], headers[i], values[i]])
+    
+    return output_data
+"
+45_2,"def transform_dataset(input_data):
+    output_data = []
+    houses = input_data[0][1:]
+    for i in range(1, len(input_data)):
+        person = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([person, input_data[0][j], input_data[i][j]])
+    return output_data"
+45_3,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0][1:]
+    
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([input_dataset[i][0], input_dataset[0][j], input_dataset[i][j]])
+    
+    return output_dataset
+
+"
+45_4,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0][1:]
+    
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([input_dataset[i][0], input_dataset[0][j], input_dataset[i][j]])
+    
+    return output_dataset
+
+"
+45_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0][1:]
+    
+    for i in range(1, len(input_dataset)):
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([input_dataset[i][0], input_dataset[0][j], input_dataset[i][j]])
+    
+    return output_dataset
+
+"
+46_1,"  
+def transform_dataset(input_data):
+    output_data = []
+    for row in input_data:
+        output_data.extend(row)
+    return [output_data]
+    
+"
+46_2,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] not in temp_dict:
+            temp_dict[item[0]] = [item]
+        else:
+            temp_dict[item[0]].append(item)
+    
+    for key in temp_dict:
+        temp_list = [key]
+        for sublist in temp_dict[key]:
+            temp_list.extend(sublist[1:])
+        temp_list.extend([''] * (11 - len(temp_list)))
+        output_data.append(temp_list)
+    
+    return output_data
+"
+46_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] not in temp_dict:
+            temp_dict[item[0]] = [item]
+        else:
+            temp_dict[item[0]].append(item)
+    
+    for key in temp_dict:
+        temp_list = [key]
+        for i in range(5):
+            if i < len(temp_dict[key]):
+                temp_list.extend(temp_dict[key][i][1:])
+            else:
+                temp_list.extend([''] * 3)
+        output_data.append(temp_list)
+    
+    return output_data
+
+"
+46_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    current_id = ''
+    temp_list = []
+
+    for row in input_data:
+        if row[0] != current_id:
+            if temp_list:
+                while len(temp_list) < 11:
+                    temp_list.append('')
+                output_data.append(temp_list)
+            current_id = row[0]
+            temp_list = [row[0], row[1], row[2]]
+        else:
+            temp_list.extend([row[1], row[2]])
+
+    if temp_list:
+        while len(temp_list) < 11:
+            temp_list.append('')
+        output_data.append(temp_list)
+
+    return output_data
+"
+46_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    current_id = ''
+    temp_list = []
+    
+    for row in input_data:
+        if row[0] != current_id:
+            if temp_list:
+                while len(temp_list) < 11:
+                    temp_list.append('')
+                output_data.append(temp_list)
+            current_id = row[0]
+            temp_list = [row[0], row[1], row[2]]
+        else:
+            temp_list.extend([row[1], row[2]])
+    
+    while len(temp_list) < 11:
+        temp_list.append('')
+    output_data.append(temp_list)
+    
+    return output_data
+"
+47_1,"def transform_data(input_data):
+    output_data = [item for sublist in input_data for item in sublist]
+    return [output_data]"
+47_2,"def transform_data(input_data):
+    output_data = [input_data[:5], input_data[5:]]
+    return output_data
+"
+47_3,"def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 5)]
+    return output_data
+"
+47_4,"def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 5)]
+    return output_data"
+47_5,"  
+def transform_dataset(input_data):
+    output_data = [input_data[i:i+5] for i in range(0, len(input_data), 5)]
+    return output_data
+"
+48_1,"def transform_data(input_data):
+    return [sublist[0].split('*')[1] for sublist in input_data]"
+48_2,"def transform_data(input_data):
+    output_data = []
+    temp = []
+    for item in input_data:
+        if item[0].startswith('*'):
+            if temp:
+                if len(temp) < 6:
+                    temp.append('')
+                output_data.append(temp)
+            temp = [item[0][1:]]
+        else:
+            temp.append(item[0])
+    if temp:
+        if len(temp) < 6:
+            temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+"
+48_3,"def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for item in input_data:
+        if item[0].startswith('*'):
+            if temp:
+                output_data.append(temp)
+            temp = [item[0][1:]]
+        else:
+            temp.append(item[0])
+    if temp:
+        output_data.append(temp)
+    return output_data
+"
+48_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0].startswith('*'):
+            if temp:
+                output_data.append(temp)
+            temp = [item[0][1:]]
+        else:
+            temp.append(item[0])
+    
+    if temp:
+        output_data.append(temp)
+    
+    return output_data
+
+
+ "
+48_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for item in input_data:
+        if item[0].startswith('*'):
+            if temp:
+                output_data.append(temp)
+            temp = [item[0][1:]]
+        else:
+            temp.append(item[0])
+    if temp:
+        output_data.append(temp)
+    
+    for item in output_data:
+        if len(item) < 7:
+            item.extend([''] * (7 - len(item)))
+    
+    return output_data
+ "
+49_1,"  
+def transform_dataset(input_data):
+    output_data = []
+    subjects = []
+    grades = []
+    
+    for item in input_data:
+        if item[0] != '':
+            output_data.append(subjects)
+            output_data.append(grades)
+            subjects = []
+            grades = []
+            output_data[0].append(item[0])
+            output_data[1].append(item[2])
+        else:
+            subjects.append(item[1])
+            grades.append(item[2])
+    
+    output_data.append(subjects)
+    output_data.append(grades)
+    
+    return output_data
+"
+49_2,"  
+def transform_dataset(input_data):
+    output_data = []
+    subjects = []
+    
+    for item in input_data:
+        if item[0] != '':
+            output_data.append(item)
+        else:
+            subjects.append(item[1])
+    
+    output_data.insert(0, subjects)
+    
+    return output_data
+
+"
+49_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] != '':
+            if temp:
+                output_data.append(temp)
+            temp = [item[0]]
+        else:
+            temp.append(item[2])
+    
+    output_data.append(temp)
+    
+    subjects = output_data[0][1:]
+    output_data[0] = ['', *subjects]
+    
+    return output_data
+"
+49_4,"  
+def transform_dataset(input_data):
+    output_data = [['', 'Art&Des', 'CreatArt', 'D&T', 'English', 'Geography', 'History', ""Hu'ties"", 'ICT', 'Maths', 'MFL', 'PE', 'Science']]
+    
+    current_student = []
+    for entry in input_data:
+        if entry[0] != '':
+            if current_student:
+                output_data.append(current_student)
+            current_student = [entry[0]]
+        current_student.append(entry[2])
+    
+    output_data.append(current_student)
+    
+    return output_data
+"
+49_5,"  
+def transform_dataset(input_data):
+    output_data = [['', 'Art&Des', 'CreatArt', 'D&T', 'English', 'Geography', 'History', ""Hu'ties"", 'ICT', 'Maths', 'MFL', 'PE', 'Science']]
+    
+    for i in range(0, len(input_data), 13):
+        student_data = [input_data[i][0]]
+        for j in range(i+1, i+13):
+            student_data.append(input_data[j][2])
+        output_data.append(student_data)
+    
+    return output_data
+
+"
+51_1,"def transform_data(input_data):
+    output_data = []
+    headers = input_data[0]
+    values = input_data[1]
+    
+    for i in range(1, len(headers)):
+        if values[i] != '':
+            output_data.append([values[0], headers[i], values[i]])
+    
+    return output_data
+
+"
+51_2,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    
+    headers = input_dataset[0][1:]
+    
+    for i in range(1, len(input_dataset)):
+        name = input_dataset[i][0]
+        for j in range(1, len(input_dataset[i])):
+            if input_dataset[i][j] != '':
+                output_dataset.append([name, headers[j-1], input_dataset[i][j]])
+    
+    return output_dataset
+"
+51_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    
+    for i in range(1, len(input_data)):
+        name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([name, headers[j-1], input_data[i][j]])
+    
+    return output_data
+"
+51_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    
+    for i in range(1, len(input_data)):
+        name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([name, headers[j], input_data[i][j]])
+    
+    return output_data
+
+"
+51_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    
+    for i in range(1, len(input_data)):
+        name = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            if input_data[i][j] != '':
+                output_data.append([name, headers[j-1], input_data[i][j]])
+    
+    return output_data
+"
+craigslist_data_wrangler_1,"def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        words = item[0].split()
+        for word in words:
+            if word.startswith('$'):
+                output_data.append(word)
+            elif word.isdigit():
+                output_data.append(word)
+    return [output_data]
+
+"
+craigslist_data_wrangler_2,"def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        temp = item[0].split(' - ')[0].split(' / ')
+        output_data.append([temp[0], temp[1].split('br')[0]])
+    return output_data
+"
+craigslist_data_wrangler_3,"def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        price = item[0].split()[0]
+        bedrooms = item[0].split()[2].split('-')[0]
+        output_data.append([price, bedrooms])
+    return output_data"
+craigslist_data_wrangler_4,"def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        price = item[0].split()[0]
+        bedrooms = item[0].split()[2].split('-')[0]
+        output_data.append([price, bedrooms])
+    return output_data"
+craigslist_data_wrangler_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        price = item[0].split()[0]
+        bedrooms = item[0].split()[2].split('-')[0]
+        output_data.append([price, bedrooms])
+    return output_data
+
+"
+crime_data_wrangler_1,"  
+def transform_dataset(input_data):
+    output_data = []
+    output_data.append([input_data[i][0] for i in range(len(input_data))])
+    output_data.append([input_data[i][1] for i in range(len(input_data))])
+    
+    return output_data"
+crime_data_wrangler_2,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    
+    for item in input_data:
+        if item[0] == '':
+            if temp:
+                output_data.append(temp)
+                temp = []
+        else:
+            temp.append(item[0])
+            temp.extend(item[1:])
+    
+    if temp:
+        output_data.append(temp)
+    
+    return output_data"
+crime_data_wrangler_3,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp = []
+    
+    for item in input_dataset:
+        if item[0] == '':
+            if temp:
+                output_dataset.append(temp)
+                temp = []
+        else:
+            temp.append(item[0])
+            temp.extend(item[1:])
+    
+    if temp:
+        output_dataset.append(temp)
+    
+    return output_dataset
+"
+crime_data_wrangler_4,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp = []
+    for item in input_dataset:
+        if item[0] == '':
+            if temp:
+                output_dataset.append(temp)
+                temp = []
+        else:
+            temp.append(item[0])
+            temp.extend(item[1:])
+    output_dataset.append(temp)
+    
+    return output_dataset
+
+"
+crime_data_wrangler_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    temp = []
+    for item in input_data:
+        if item[0] == '':
+            if temp:
+                output_data.append(temp)
+                temp = []
+        else:
+            temp.append(item[0])
+            temp.extend(item[1:])
+    if temp:
+        output_data.append(temp)
+    
+    return output_data
+"
+potters_wheel_divide_1,"def transform_data(input_data):
+    output_data = input_data
+    return output_data
+
+"
+potters_wheel_divide_2,"def transform_dataset(input_data):
+    max_len = max(len(row) for row in input_data)
+    output_data = []
+    for row in input_data:
+        new_row = row + [''] * (max_len - len(row))
+        output_data.append(new_row)
+    return output_data
+"
+potters_wheel_divide_3,"def transform_dataset(input_data):
+    max_len = max(len(row) for row in input_data)
+    output_data = []
+    for row in input_data:
+        new_row = row + [''] * (max_len - len(row))
+        output_data.append(new_row)
+    return output_data
+
+ "
+potters_wheel_divide_4,"def transform_dataset(input_data):
+    output_data = []
+    for i in range(len(input_data)):
+        output_data.append(['', input_data[i][0], input_data[i][1]])
+        output_data.append([input_data[i][0], input_data[i][1], ''])
+    return output_data
+"
+potters_wheel_divide_5,"def transform_dataset(input_data):
+    output_data = []
+    for item in input_data:
+        if len(item) == 2:
+            output_data.append(['', item[0], item[1]])
+        else:
+            output_data.append(item)
+    return output_data
+"
+potters_wheel_fold_1,"  
+def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French']]
+    for data in input_data:
+        output_data.append([data[0]] + [x.split(':')[1] for x in data[1:]])
+    return output_data"
+potters_wheel_fold_2,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extracting headers from the first sublist
+    headers = [''] + [item.split(':')[0] for item in input_data[0][1:]]
+    output_data.append(headers)
+    
+    # Extracting values from the remaining sublists
+    for sublist in input_data:
+        values = [sublist[0]] + [item.split(':')[1] for item in sublist[1:]]
+        output_data.append(values)
+    
+    return output_data
+"
+potters_wheel_fold_3,"def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French']]
+    
+    for entry in input_data:
+        new_entry = [entry[0]]
+        for item in entry[1:]:
+            new_entry.append(item.split(':')[1])
+        output_data.append(new_entry)
+    
+    return output_data
+
+"
+potters_wheel_fold_4,"def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French']]
+    
+    for row in input_data:
+        new_row = [row[0]]
+        for item in row[1:]:
+            new_row.append(item.split(":")[1])
+        output_data.append(new_row)
+    
+    return output_data
+"
+potters_wheel_fold_5,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extracting headers
+    headers = ['', input_data[0][1].split(':')[0], input_data[0][2].split(':')[0]
+    output_data.append(headers)
+    
+    # Transforming data
+    for row in input_data[1:]:
+        new_row = [row[0]]
+        new_row.extend([value.split(':')[1] for value in row[1:]])
+        output_data.append(new_row)
+    
+    return output_data
+
+"
+potters_wheel_fold_2_1,"  
+def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French', 'History']]
+    for item in input_data:
+        output_data.append([item[0]] + [x.split(':')[1] for x in item[1:]])
+    return output_data"
+potters_wheel_fold_2_2,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extracting headers from the first list in the input dataset
+    headers = [''] + [item.split(':')[0] for item in input_data[0][1:]]
+    output_data.append(headers)
+    
+    # Extracting data for each student
+    for student_data in input_data:
+        student_info = [student_data[0]] + [item.split(':')[1] for item in student_data[1:]]
+        output_data.append(student_info)
+    
+    return output_data
+"
+potters_wheel_fold_2_3,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extracting headers
+    headers = [''] + [subject.split(':')[0] for subject in input_data[0][1:]]
+    output_data.append(headers)
+    
+    # Extracting data
+    for row in input_data:
+        output_row = [row[0]] + [subject.split(':')[1] for subject in row[1:]]
+        output_data.append(output_row)
+    
+    return output_data
+"
+potters_wheel_fold_2_4,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Extract headers from the first list in the input dataset
+    headers = [''] + [item.split(':')[0] for item in input_data[0][1:]]
+    output_data.append(headers)
+    
+    # Extract data from the remaining lists in the input dataset
+    for row in input_data[1:]:
+        output_data.append([row[0]] + [item.split(':')[1] for item in row[1:]])
+    
+    return output_data
+"
+potters_wheel_fold_2_5,"  
+def transform_dataset(input_data):
+    output_data = []
+    
+    # Extract header row
+    header = [''] + [subject.split(':')[0] for subject in input_data[0][1:]]
+    output_data.append(header)
+    
+    # Extract data rows
+    for row in input_data:
+        output_data.append([row[0]] + [subject.split(':')[1] for subject in row[1:]])
+    
+    return output_data
+"
+potters_wheel_merge_split_1,"def transform_names(input_data):
+    output_data = []
+    for name in input_data:
+        split_name = name[0].split(',')
+        output_data.append([split_name[1], split_name[0]])
+    return output_data
+"
+potters_wheel_merge_split_2,"  
+def transform_data(input_data):
+    output_data = []
+    for row in input_data:
+        new_row = [element.strip() for element in row if element.strip() != '']
+        if len(new_row) == 2:
+            output_data.append([new_row[2], new_row[0]])
+        else:
+            output_data.append(new_row)
+    return output_data
+"
+potters_wheel_merge_split_3,"def transform_names(input_data):
+    output_data = []
+    for entry in input_data:
+        new_entry = [name.strip() for name in entry if name.strip() != '']
+        if len(new_entry) == 2:
+            output_data.append([new_entry[2], new_entry[1]])
+        else:
+            output_data.append(new_entry)
+    return output_data
+
+"
+potters_wheel_merge_split_4,"def transform_names(input_data):
+    output_data = []
+    for entry in input_data:
+        first_name = entry[0].split(',')[1] if entry[0] else ''
+        last_name = entry[2].split(',')[0] if entry[2] else ''
+        output_data.append([first_name, last_name])
+    return output_data
+"
+potters_wheel_merge_split_5,"  
+def transform_names(input_data):
+    output_data = []
+    for row in input_data:
+        first_name = row[2].split(',')[0].strip()
+        last_name = row[2].split(',')[1].strip()
+        output_data.append([first_name, last_name])
+    return output_data
+"
+potters_wheel_split_fold_1,"  
+def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        name = item[0]
+        names = item[1].split(', ')
+        for n in names:
+            output_data.append([name, n])
+    return output_data
+"
+potters_wheel_split_fold_2,"def transform_data(input_data):
+    output_data = []
+    for entry in input_data:
+        last_name = entry[0]
+        first_names = entry[1].split(', ')
+        for name in first_names:
+            output_data.append([last_name, name])
+    return output_data
+
+"
+potters_wheel_split_fold_3,"def transform_names(input_data):
+    output_data = []
+    for names in input_data:
+        last_name = names[0]
+        first_names = names[1].split(', ')
+        for first_name in first_names:
+            output_data.append([last_name, first_name])
+    return output_data
+"
+potters_wheel_split_fold_4,"def transform_names(input_data):
+    output_data = []
+    for names in input_data:
+        last_name = names[0]
+        first_names = names[1].split(', ')
+        for first_name in first_names:
+            output_data.append([last_name, first_name])
+    return output_data
+"
+potters_wheel_split_fold_5,"  
+def transform_data(input_data):
+    output_data = []
+    for item in input_data:
+        last_name = item[0]
+        first_names = item[1].split(', ')
+        for name in first_names:
+            output_data.append([last_name, name])
+    return output_data"
+potters_wheel_unfold_1,"def transform_dataset(input_data):
+    output_data = [['', input_data[0][1], input_data[1][1]], [input_data[0][0], input_data[0][2], input_data[1][2]]]
+    return output_data
+"
+potters_wheel_unfold_2,"def transform_dataset(input_data):
+    output_data = []
+    
+    # Get unique subjects
+    subjects = set()
+    for entry in input_data:
+        subjects.add(entry[1])
+    
+    # Create header row
+    header = ['']
+    header.extend(list(subjects))
+    output_data.append(header)
+    
+    # Create data rows
+    students = set()
+    for entry in input_data:
+        students.add(entry[0])
+    
+    for student in students:
+        row = [student]
+        for subject in subjects:
+            grade = ''
+            for entry in input_data:
+                if entry[0] == student and entry[1] == subject:
+                    grade = entry[2]
+            row.append(grade)
+        output_data.append(row)
+    
+    return output_data
+"
+potters_wheel_unfold_3,"  
+def transform_dataset(input_data):
+    output_data = []
+    
+    # Get unique subjects
+    subjects = set([x[1] for x in input_data])
+    subjects = [''] + sorted(list(subjects))
+    
+    output_data.append(subjects)
+    
+    # Create empty dictionary to store scores
+    scores_dict = {}
+    for name, subject, score in input_data:
+        if name not in scores_dict:
+            scores_dict[name] = {}
+        scores_dict[name][subject] = score
+    
+    # Fill in the scores in the output dataset
+    for name in scores_dict:
+        row = [name]
+        for subject in subjects[1:]:
+            if subject in scores_dict[name]:
+                row.append(scores_dict[name][subject])
+            else:
+                row.append('')
+        output_data.append(row)
+    
+    return output_data
+"
+potters_wheel_unfold_4,"def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French', 'English']]
+    
+    students = set()
+    subjects = set()
+    
+    for entry in input_data:
+        students.add(entry[0])
+        subjects.add(entry[1])
+    
+    students = sorted(list(students))
+    subjects = sorted(list(subjects))
+    
+    for student in students:
+        row = [student]
+        for subject in subjects:
+            grade = ''
+            for entry in input_data:
+                if entry[0] == student and entry[1] == subject:
+                    grade = entry[2]
+            row.append(grade)
+        output_data.append(row)
+    
+    return output_data
+"
+potters_wheel_unfold_5,"def transform_dataset(input_data):
+    output_data = [['', 'Math', 'French', 'English']]
+    
+    students = set()
+    subjects = set()
+    
+    for entry in input_data:
+        students.add(entry[0])
+        subjects.add(entry[1])
+    
+    students = sorted(list(students))
+    subjects = sorted(list(subjects))
+    
+    for student in students:
+        row = [student]
+        for subject in subjects:
+            grade = ''
+            for entry in input_data:
+                if entry[0] == student and entry[1] == subject:
+                    grade = entry[2]
+            row.append(grade)
+        output_data.append(row)
+    
+    return output_data
+"
+potters_wheel_unfold2_1,"def transform_data(input_data):
+    output_data = []
+    for data in input_data:
+        if data[0] == 'Latimer':
+            output_data.append(data)
+    return output_data"
+potters_wheel_unfold2_2,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for data in input_data:
+        if data[0] in temp_dict:
+            temp_dict[data[0]].append(data[1])
+        else:
+            temp_dict[data[0]] = [data[1]]
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data
+"
+potters_wheel_unfold2_3,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] in temp_dict:
+            temp_dict[item[0]].append(item[1])
+        else:
+            temp_dict[item[0]] = [item[1]]
+    
+    for key, value in temp_dict.items():
+        while len(value) < 3:
+            value.append('')
+        output_data.append([key] + value)
+    
+    return output_data
+"
+potters_wheel_unfold2_4,"def transform_data(input_data):
+    output_data = []
+    temp_dict = {}
+    
+    for item in input_data:
+        if item[0] not in temp_dict:
+            temp_dict[item[0]] = [item[1], '', '']
+        else:
+            temp_dict[item[0]].append(item[1])
+    
+    for key, value in temp_dict.items():
+        output_data.append([key] + value)
+    
+    return output_data
+"
+potters_wheel_unfold2_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    temp_dict = {}
+    
+    for item in input_dataset:
+        if item[0] in temp_dict:
+            temp_dict[item[0]].append(item[1])
+        else:
+            temp_dict[item[0]] = [item[1]]
+    
+    for key, value in temp_dict.items():
+        while len(value) < 4:
+            value.append('')
+        output_dataset.append([key] + value)
+    
+    return output_dataset
+"
+proactive_wrangling_fold_1,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    for i in range(1, len(input_data[1])):
+        output_data.append([input_data[1][0], headers[1], input_data[1][i]])
+        output_data.append([input_data[1][0], headers[2], input_data[1][i]])
+    return output_data
+"
+proactive_wrangling_fold_2,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    countries = [row[0] for row in input_data[1:]]
+    
+    for country in countries:
+        for header in headers:
+            value = input_data[countries.index(country) + 1][headers.index(header) + 1]
+            output_data.append([country, header, value])
+    
+    return output_data"
+proactive_wrangling_fold_3,"def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0][1:]
+    for i in range(1, len(input_data)):
+        country = input_data[i][0]
+        for j in range(1, len(input_data[i])):
+            output_data.append([country, headers[j-1], input_data[i][j]])
+    return output_data"
+proactive_wrangling_fold_4,"  
+def transform_dataset(input_data):
+    output_data = []
+    headers = input_data[0]
+    
+    for i in range(1, len(input_data)):
+        country = input_data[i][0]
+        boys = input_data[i][1]
+        girls = input_data[i][2]
+        
+        output_data.append([country, headers[1], boys])
+        output_data.append([country, headers[2], girls])
+    
+    return output_data
+"
+proactive_wrangling_fold_5,"  
+def transform_dataset(input_dataset):
+    output_dataset = []
+    headers = input_dataset[0]
+    
+    for i in range(1, len(input_dataset)):
+        country = input_dataset[i][0]
+        boys = input_dataset[i][1]
+        girls = input_dataset[i][2]
+        
+        output_dataset.append([country, headers[1], boys])
+        output_dataset.append([country, headers[2], girls])
+    
+    return output_dataset
+"
+proactive_wrangling_complex_1,"def transform_data(input_data):
+    output_data = []
+    headers = []
+    
+    for row in input_data:
+        if row[0] != '':
+            headers.append(row[0])
+    
+    output_data.append([''] + headers)
+    
+    for row in input_data:
+        if row[0] != '':
+            output_row = []
+            for header in headers:
+                if header in row[0]:
+                    output_row.append(row[1])
+                else:
+                    output_row.append('')
+            output_data.append(output_row)
+    
+    return output_data"
+proactive_wrangling_complex_2,"  
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 2):
+        name = input_data[i-1][0]
+        tel = input_data[i][1].split(':')[1]
+        fax = input_data[i+1][1].split(':')[1] if i+1 < len(input_data) else ''
+        
+        output_data.append([name, f'({tel})', f'({fax})'])
+    
+    return output_data
+"
+proactive_wrangling_complex_3,"  
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+
+"
+proactive_wrangling_complex_4,"  
+def transform_dataset(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+"
+proactive_wrangling_complex_5,"  
+def transform_data(input_data):
+    output_data = [['', 'Tel', 'Fax']]
+    
+    for i in range(1, len(input_data), 3):
+        name = input_data[i][0]
+        tel = input_data[i+1][0].split(':')[1]
+        fax = input_data[i+2][0].split(':')[1]
+        
+        output_data.append([name, tel, fax])
+    
+    return output_data
+"
+reshape_table_structure_data_wrangler_1,"  
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = []
+    salaries = []
+    
+    for data in input_data:
+        years.append(data[0])
+        salaries.append(data[2])
+    
+    output_data.append([years[0]] + salaries)
+    
+    return output_data
+"
+reshape_table_structure_data_wrangler_2,"  
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            for data in input_data:
+                if data[0] == year and data[1] == str(i):
+                    temp.append(data[2])
+                    break
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+"
+reshape_table_structure_data_wrangler_3,"  
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set()
+    for entry in input_data:
+        years.add(entry[0])
+    
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            for entry in input_data:
+                if entry[0] == year and entry[1] == str(i):
+                    temp.append(entry[2])
+                    break
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+"
+reshape_table_structure_data_wrangler_4,"  
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            value = [data[2] for data in input_data if data[0] == year and data[1] == str(i)]
+            if value:
+                temp.append(value[0])
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+
+"
+reshape_table_structure_data_wrangler_5,"  
+def transform_dataset(input_data):
+    output_data = [['', '1', '2', '3', '4', '5', '6']]
+    
+    years = set([data[0] for data in input_data])
+    years = sorted(list(years))
+    
+    for year in years:
+        temp = [year]
+        for i in range(1, 7):
+            value = [data[2] for data in input_data if data[0] == year and data[1] == str(i)]
+            if value:
+                temp.append(value[0])
+            else:
+                temp.append('')
+        output_data.append(temp)
+    
+    return output_data
+"
+

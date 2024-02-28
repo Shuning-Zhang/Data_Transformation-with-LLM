@@ -1,0 +1,1 @@
+{"InputTable": [["Male"], ["Female"], ["Unknown"], ["Female"], ["Female"]], "OutputTable": ["0", "1", "2", "1", "1"], "TestingTable": [["Male"], ["Unknown"], ["Male"], ["Female"]], "TestAnswer": ["0", "2", "0", "1"]}

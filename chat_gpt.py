@@ -26,26 +26,37 @@ class GPT_Model:
         llm = ChatOpenAI(model_name='gpt-3.5-turbo', temperature = 0.0)
         return llm
     
-def gpt_output(template_c, GPT_Model):
-    result= []
-    for j in range(3,4):
-        for i in range(1,6):
-            path = 'data/foofah/exp0_'+str(j) + '_'+ str(i)+'_new'+ '.txt'
-            input_data, test_data = read_in_data(path)
-            llm = GPT_Model.environemnt_setup()
-            # tutorial = GPT_Model.get_tutorial(llm, input_data)
+def gpt_output(template_c):
+        result= []
+        # for j in range(2,3):
+        #     for i in range(1,2):
+        #         path = '../data/foofah/exp0_'+str(j) + '_'+ str(i)+ '.txt'
+        #         input_data, test_data = read_in_data(path)
+        #         llm = self.environemnt_setup()
 
-            p_tutorial= PromptTemplate(input_variables=['input_list', 'output_list'],
-                                template=template_c)
-            chain1 = LLMChain(llm = llm, prompt = p_tutorial)
-            with get_openai_callback() as cb:
-                tutorial = chain1.run({'input_list': input_data[0], 'output_list': input_data[1]})
-                print(cb.total_tokens)
-            
-            result.append([str(j) + '_'+ str(i), tutorial])
-            
-            # display(Markdown(f"<b>{tutorial}</b>"))
-    return result
+        #         p_tutorial= PromptTemplate(input_variables=['input_list', 'output_list'],
+        #                             template=template_c)
+        #         chain1 = LLMChain(llm = llm, prompt = p_tutorial)
+        #         with get_openai_callback() as cb:
+        #             tutorial = chain1.run({'input_list': input_data[0], 'output_list': input_data[1]})
+        #             print(cb.total_tokens)
+                
+        #         result.append([str(j) + '_'+ str(i), tutorial])
+        path = 'data/foofah/Transformation.Text/Address.000002.txt'
+        input_data, test_data = read_in_data(path)
+        llm = GPT_Model.environemnt_setup()
+
+        p_tutorial= PromptTemplate(input_variables=['input_list', 'output_list'],
+                                    template=template_c)
+        chain1 = LLMChain(llm = llm, prompt = p_tutorial)
+        with get_openai_callback() as cb:
+            tutorial = chain1.run({'input_list': input_data[0], 'output_list': input_data[1]})
+            print(cb.total_tokens)
+                
+        result.append(tutorial)
+                
+
+        return result
 
 
 # set up the gpt model
@@ -78,7 +89,7 @@ template_updated = '''
 
 # o stands for output
 result = gpt_output(template_updated, GPT_Model)
-# print(result)
+print(result)
 output= []
 for x in result:
     # if 'python\n' in x[1]:
@@ -87,7 +98,8 @@ for x in result:
     #     o = x[1]
 
 
-    o = x[1].split('\n\ninput_data')
+    o = x.split('\n\ninput_data')
+    print(o)
     d = {'data': x[0],'output': o[0]}
 
     output.append(d)

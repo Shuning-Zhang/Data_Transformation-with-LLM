@@ -178,7 +178,7 @@ def main():
     #
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--details', action='store_true', default=False,
+    parser.add_argument('--details', action='store_true', default=True,
                         help="Print the detailed synthesized programs and intermediate tables")
 
     parser.add_argument('--input', type=str, nargs='+',
@@ -190,7 +190,7 @@ def main():
 
     parser.add_argument('--auto_read', action='store_true', help="Automatically read csv file using csv reader")
 
-    parser.add_argument('--validate', action='store_true', default=False,
+    parser.add_argument('--validate', action='store_true', default=True,
                         help="Validating the correctness of synthesized program")
 
     parser.add_argument('--search_algo', type=int, default=1,
@@ -366,14 +366,14 @@ def main():
                         len(path) + 1)
                     print
 
-                print "-" * 50
-                print "Input file:", test_file
-                print "Total operations:", len(path) - 1
-                print "Time elapsed:    %.3f s   Nodes visited:  %d   Nodes created: %d" % (
-                    (end - start), num_visited, nodes_created)
-                print "Naive branching factor: %d   Effective branching factor: %.2f" % (len(Operations.add_ops()), branch_factor)
-                print "Make child time: %.2f s   Heuristic time: %.2f s" % (
-                    sum(final_node.times['children']), sum(final_node.times['scores']))
+                # print "-" * 50
+                # print "Input file:", test_file
+                # print "Total operations:", len(path) - 1
+                # print "Time elapsed:    %.3f s   Nodes visited:  %d   Nodes created: %d" % (
+                #     (end - start), num_visited, nodes_created)
+                # print "Naive branching factor: %d   Effective branching factor: %.2f" % (len(Operations.add_ops()), branch_factor)
+                # print "Make child time: %.2f s   Heuristic time: %.2f s" % (
+                #     sum(final_node.times['children']), sum(final_node.times['scores']))
 
                 if if_validate:
                     test_table = test_data['TestingTable']
@@ -392,27 +392,27 @@ def main():
                     if test_table:
                         test_data["TransformedTestTable"] = test_table
                         test_data["Success"] = True
-                        print "-" * 50
-                        print "Experiment 1: Apply the synthetic program on other data"
-                        print "-" * 30
-                        print "Testing Table"
-                        print tabulate(test_data['TestingTable'], tablefmt="grid")
+                        # print "-" * 50
+                        # print "Experiment 1: Apply the synthetic program on other data"
+                        # print "-" * 30
+                        # print "Testing Table"
+                        # print tabulate(test_data['TestingTable'], tablefmt="grid")
 
-                        print "Transformed Table"
-                        print tabulate(test_data["TransformedTestTable"], tablefmt="grid")
-                        print "-" * 30
+                        # print "Transformed Table"
+                        # print tabulate(test_data["TransformedTestTable"], tablefmt="grid")
+                        # print "-" * 30
                         print "Result: Success"
                         print "-" * 50
 
                     else:
-                        test_data["TransformedTestTable"] = test_table
+                        test_data["TransformedTestTable"] = []
                         test_data["Success"] = False
-                        print "-" * 50
-                        print "Experiment 1: Apply the synthetic program on other data"
-                        print "-" * 30
-                        print "Testing Table"
-                        print tabulate(test_data['TestingTable'], tablefmt="grid")
-                        print "-" * 30
+                        # print "-" * 50
+                        # print "Experiment 1: Apply the synthetic program on other data"
+                        # print "-" * 30
+                        # print "Testing Table"
+                        # print tabulate(test_data['TestingTable'], tablefmt="grid")
+                        # print "-" * 30
                         print "Result: Failure"
                         print "-" * 50
 
@@ -426,7 +426,7 @@ def main():
                             raise
 
                     with open(filename, 'w') as outfile:
-                        json.dump(test_data, outfile)
+                        json.dump(test_data["TransformedTestTable"], outfile)
 
         else:
             print "*** Solution Not Found ***"

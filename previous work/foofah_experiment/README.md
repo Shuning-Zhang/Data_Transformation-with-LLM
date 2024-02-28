@@ -1,24 +1,12 @@
 # Foofah
 
-**Foofah** [1][2]  is a programming-by-example data transformation program synthesis system. It is able to generate a data transformation program defined in Professor Joe Hellerstein's Potter's Wheel paper [3] using an input-output example from the end user.
 
-## Requirements
-
- - Linux
- - Python 2.7
- - g++
- - [Boost.Python](http://www.boost.org/doc/libs/1_64_0/libs/python/doc/html/index.html) ([Mac](http://www.pyimagesearch.com/2015/04/27/installing-boost-and-boost-python-on-osx-with-homebrew/), [Linux](https://stackoverflow.com/questions/12578499/how-to-install-boost-on-ubuntu))
- - [setuptools](https://pypi.python.org/pypi/setuptools)
-	 ```sh
-	$ python -m pip install -U pip setuptools
-	```
-
-In fact, other Python modules `numpy`, `tabulate`, `cherrypy`, `editdistance`, `python-Levenshtein` , `matplotlib` are also required. But they could be installed using setuptools in next section.
 
 ## Foofah on Docker
 
 Build Foofah container
 ```sh
+$ cd foofah
 $ docker build -t foofah .
 ```
 
@@ -28,10 +16,10 @@ $ docker run -p 8080:8080 foofah
 ```
 Foofah web service will be available at [localhost:8080](http://0.0.0.0:8080).
 
-## Installation
+## Run Foofah on Docker 
 ```sh
-$ cd foofah
-$ python setup.py install
+$ chmod +x run.sh 
+$ ./run.sh
 ```
 
 ## User Guide

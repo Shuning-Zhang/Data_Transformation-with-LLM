@@ -11,12 +11,15 @@ from model import GPT_Model
 
 
 # api key:
-# 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
-
-
-
+#3.5
+# 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
+#4.0
+# sk-GardnCuVxSwbqswZ1a55F262A4D74431Af05AbD6D5C72dA2
 # set up the gpt model
-GPT_Model = GPT_Model('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')
+
+GPT_Model = GPT_Model('sk-GardnCuVxSwbqswZ1a55F262A4D74431Af05AbD6D5C72dA2',3.5)
+
+#GPT_Model = GPT_Model('sk-GardnCuVxSwbqswZ1a55F262A4D74431Af05AbD6D5C72dA2',4.0)
 # setting up template
 template_c= '''
 
@@ -34,7 +37,7 @@ template_c= '''
 '''
 
 # o stands for output
-result = GPT_Model.gpt_output(template_c, GPT_Model)
+result = GPT_Model.gpt_output(template_c)
 # print(result)
 output= []
 for x in result:
@@ -43,4 +46,6 @@ for x in result:
 
     output.append(d)
 df = pd.DataFrame(output)
-df.to_csv('output_chat_gpt_part.csv', index=False)
+df.to_csv('output_chat_gpt_3_5.csv', index=False)
+
+

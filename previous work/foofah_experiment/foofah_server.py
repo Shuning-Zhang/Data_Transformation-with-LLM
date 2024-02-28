@@ -23,67 +23,17 @@ class MainPage(object):
     index.exposed = True
 
     @cherrypy.expose
-    def execute(self):
+    def astar(self):
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl))
         body = json.loads(rawbody)
-        
-        print('body:')
-        print(body)
-        print()
 
-
-        test_data = None
-        filename = 'tests/data/exp0_3_2.txt'
-        with open(filename, 'rb') as f:
-            test_data = json.load(f)
-        test_table = [map(str, x) for x in test_data['TestingTable']]
-
-        path = self.program_cache[body['serialized_program']]
-
-        #test_table = body['test_table']
-        print('path:')
-        print(path)
+        print
+        print body
         print
 
-        for i, node in enumerate(reversed(path)):
-            if i > 0:
-                op = node.operation[0]
-                if op['num_params'] == 1:
-                    test_table = op['fxn'](test_table)
-
-                else:
-                    test_table = op['fxn'](test_table, node.operation[1])
-
-        ret_val = {'transformed_table': test_table}
-
-        with open("output_data_0_3_2.json", "w") as file: 
-            json.dump(ret_val, file)
-
-        return json.dumps(ret_val)
-
-    @cherrypy.expose
-    def astar(self):
-        # cl = cherrypy.request.headers['Content-Length']
-        # rawbody = cherrypy.request.body.read(int(cl))
-        # body = json.loads(rawbody)
-
-        # print
-        # print body
-        # print
-
-        # raw_data = [map(str, x) for x in body['InputTable']]
-        # target = [map(str, x) for x in body['OutputTable']]
-        
-        test_data = None
-        filename = 'tests/data/exp0_3_2.txt'
-        with open(filename, 'rb') as f:
-            test_data = json.load(f)
-
-
-        raw_data = [map(str, x) for x in test_data['InputTable']]
-        target = [map(str, x) for x in test_data['OutputTable']]
-        test_table = [map(str, x) for x in test_data['TestingTable']]
+        raw_data = [map(str, x) for x in body['InputTable']]
+        target = [map(str, x) for x in body['OutputTable']]
 
         start = timer()
         final_node, open_nodes, closed_nodes = foofah.a_star_search(raw_data, target, add_ops(), 0, 100, batch=True,
@@ -114,9 +64,6 @@ class MainPage(object):
 
             unique_id = uuid.uuid4()
 
-            print(unique_id)
-            print
-
             self.program_cache[str(unique_id)] = path
 
             ret_val = {'actual_steps': actual_steps,
@@ -130,8 +77,7 @@ class MainPage(object):
                        'num_visited': num_visited,
                        'nodes_created': nodes_created
                        }
-
-            # return json.dumps(ret_val)
+            return json.dumps(ret_val)
 
         else:
             poly = np.ones(len(path) + 1)
@@ -146,43 +92,38 @@ class MainPage(object):
                        'num_visited': num_visited,
                        'nodes_created': nodes_created
                        }
-            
-        # path = str(unique_id)
-
-        # #test_table = body['test_table']
-
-        # for i, node in enumerate(reversed(path)):
-        #     if i > 0:
-        #         op = node.operation[0]
-        #         if op['num_params'] == 1:
-        #             test_table = op['fxn'](test_table)
-
-        #         else:
-        #             test_table = op['fxn'](test_table, node.operation[1])
-
-        # ret_val = {'transformed_table': test_table}
-
-        # with open("output_data_0_3_2_learn.json", "w") as file: 
-        #    json.dump(ret_val, file)
-
-        return json.dumps(ret_val)
+            return json.dumps(ret_val)
 
     @cherrypy.expose
     def cache(self):
-        print
-        print('called cache')
-        print
-
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl))
-        print('rawbody:')
-        print(rawbody)
         fn = time.strftime("%Y_%m_%d_%H_%M_%S")
         fo = open("./public/log/" + fn, "w")
         fo.write(rawbody)
         fo.close()
 
-    
+    @cherrypy.expose
+    def execute(self):
+        cl = cherrypy.request.headers['Content-Length']
+        rawbody = cherrypy.request.body.read(int(cl))
+        body = json.loads(rawbody)
+
+        path = self.program_cache[body['serialized_program']]
+
+        test_table = body['test_table']
+
+        for i, node in enumerate(reversed(path)):
+            if i > 0:
+                op = node.operation[0]
+                if op['num_params'] == 1:
+                    test_table = op['fxn'](test_table)
+
+                else:
+                    test_table = op['fxn'](test_table, node.operation[1])
+
+        ret_val = {'transformed_table': test_table}
+        return json.dumps(ret_val)
 
 
 if __name__ == '__main__':

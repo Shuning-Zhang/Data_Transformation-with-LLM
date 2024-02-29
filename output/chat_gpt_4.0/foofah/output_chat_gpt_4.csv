@@ -1284,9 +1284,7 @@ def transform_dataset(input_dataset):
     return output_dataset
 
  "
-36_1,"The   function to transform the provided input dataset to the output dataset is as follows:
-
-  
+36_1,"
 def transform_dataset(input_dataset):
     headers = [''] + [row[1] for row in input_dataset]
     values = [input_dataset[0][0]] + [row[2] for row in input_dataset]
@@ -1439,7 +1437,7 @@ def transform_dataset(input_dataset):
         base = row[:6]
         i = 6
         while i < len(row):
-            if row[i].startswith(""Err:512""):
+            if row[i].startswith("Err:512"):
                 output_dataset.append(base + ['Err:512', 'Err:512', 'Err:512', 'Err:512'])
                 i += 4  # Skip the next 4 error markers, as they're already added
             else:
@@ -1733,9 +1731,7 @@ def transform_dataset(input_dataset):
     return [list(sum(input_dataset, []))]
  "
 47_2,The   function provided transforms the input dataset into the output dataset by splitting the input list into chunks of 5 elements each.
-47_3,"Here's a   function that performs the transformation from the input dataset to the output dataset:
-
-  
+47_3,"
 def transform_dataset(input_dataset):
     output_dataset = []
     for i in range(0, len(input_dataset), 5):
@@ -1866,7 +1862,7 @@ def transform_dataset(input_data):
         if i == 0 or input_data[i][0]:
             subjects.append(row[1])
     
-    output_data.append([""""] + subjects)
+    output_data.append([""] + subjects)
 
     # Read through each row and collate data under each student name
     for row in input_data:
@@ -1879,7 +1875,7 @@ def transform_dataset(input_data):
         
     # Organize data into output format
     for name in student_record:
-        grades = [student_record[name].get(subject, """") for subject in subjects]
+        grades = [student_record[name].get(subject, "") for subject in subjects]
         output_data.append([name] + grades)
     
     return output_data
@@ -1906,7 +1902,7 @@ def transform_dataset(input_dataset):
     header = [''] + [row[1] for row in input_dataset if row[0]]
     transformed_data = [header]
     student_data = {}
-    current_student = """"
+    current_student = ""
     
     for row in input_dataset:
         if row[0]:
@@ -1938,7 +1934,7 @@ def transform_dataset(input_dataset):
     for student, grades in student_data.items():
         row = [student]
         for subject in subjects:
-            row.append(grades.get(subject, """"))
+            row.append(grades.get(subject, ""))
         output_dataset.append(row)
     
     return output_dataset
@@ -2006,15 +2002,13 @@ craigslist_data_wrangler_1,"
 def transform_dataset(input_dataset):
     output_dataset = []
     for item in input_dataset:
-        fields = item[0].split("" "")
+        fields = item[0].split(" ")
         price = fields[0]
-        bedrooms = fields[1].split(""br"")[0]
+        bedrooms = fields[1].split("br")[0]
         output_dataset.append([price, bedrooms])
     return output_dataset
  "
-craigslist_data_wrangler_2,"Here's a   function that performs the required transformation:
-
-  
+craigslist_data_wrangler_2,"
 import re
 
 def transform_dataset(input_dataset):
@@ -2022,8 +2016,8 @@ def transform_dataset(input_dataset):
     for item in input_dataset:
         if item:
             string = item[0]
-            price = re.search(r""\$(\d+)"", string).group()
-            bedrooms = re.search(r""(\d+)br"", string).group(1)
+            price = re.search(r"\$(\d+)", string).group()
+            bedrooms = re.search(r"(\d+)br", string).group(1)
             output_dataset.append([price, bedrooms])
     return output_dataset
 "
@@ -2031,8 +2025,8 @@ craigslist_data_wrangler_3,"
 def transform_dataset(input_dataset):
     output_dataset = []
     for item in input_dataset:
-        price = item[0].split("" "")[0]
-        br = item[0].split("" "")[2][:1]
+        price = item[0].split(" ")[0]
+        br = item[0].split(" ")[2][:1]
         output_dataset.append([price, br])
     return output_dataset
  "
@@ -2063,7 +2057,7 @@ def transform_input_to_output(input_dataset):
         if input_dataset[i][0] != '':
             data.append(input_dataset[i][0])
         else:
-            data.append("""")
+            data.append("")
         header.append(input_dataset[i][0])
         
     output_dataset = [header]
@@ -2314,9 +2308,7 @@ def transform_dataset(input_dataset):
         output_dataset.append(new_row)
     return output_dataset
  "
-potters_wheel_merge_split_3,"The   function to transform the input dataset to the output dataset is as follows:
-
-  
+potters_wheel_merge_split_3,"
 def transform_dataset(input_dataset):
     output_dataset = []
     for row in input_dataset:
@@ -2671,7 +2663,7 @@ proactive_wrangling_complex_5,"def transform_dataset(input_dataset):
     return output_dataset"
 reshape_table_structure_data_wrangler_1,"  
 def transform_dataset(input_dataset):
-    headers = [""""]
+    headers = [""]
     amounts = []
     
     for record in input_dataset:

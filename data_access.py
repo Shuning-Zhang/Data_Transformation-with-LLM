@@ -20,9 +20,9 @@ def read_output_data(file_name):
     test_data = None    
     output_data = ['']
     with open(file_name, 'rb') as f:
-        test_data = json.load(f)
+        output_data = json.load(f)
 
-    output_data[0] = test_data['transformed_table']
+
  
 
     return output_data

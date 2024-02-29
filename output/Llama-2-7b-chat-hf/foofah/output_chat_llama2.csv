@@ -1302,9 +1302,9 @@ def transform_data(input_data):
 "
 26_1,"# Extract the columns from the original dataset
 columns = ['Name', 'Age', 'Gender', 'Birthday']
-```
+
 2. Create a new dataset with the extracted columns:
-```"
+"
 26_2,"def transform_data(input_data):
     # Split the input data into two lists, one containing the names and ages, and another containing the genders and birthdays
     names_and_ages = [name, age] for name, age in input_data
@@ -1361,11 +1361,11 @@ columns = ['Name', 'Age', 'Gender', 'Birthday']
 
 "
 27_3,"flattened_data = list(map(lambda x: x[0], dataset))
-```
+
 Here, `dataset` is the input dataset, and `flattened_data` is the resulting flattened list.
 
 2. Add a new element to the end of the flattened list for each original element in the input dataset. We can do this using a simple loop:
-```"
+"
 27_4,"def transform_data(input_data):
     # Perform the data transformation steps
     result = []
@@ -2031,8 +2031,733 @@ def transform_data(input_data):
     
     return input_data
 "
+41_4,"import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Extract column names from the input data
+    column_names = input_data.columns.tolist()
+    
+    # Step 2: Create new columns with the desired names
+    new_column_names = [""RM 11"", ""RM 16"", ""RM 27"", ""RM 48""]
+    for column_name in new_column_names:
+        input_data[column_name] = input_data[""DD 1004036""].apply(lambda x: x.replace(""T-"", """"))
+    
+    # Step 3: Replace certain values with their corresponding errors
+    input_data[""Err:512""] = input_data[""Err:512""].apply(lambda x: x.replace(""RM "", """"))
+    
+    return input_data
+"
+41_5,""
+
+43_1,"def transform_data(input_dataset):
+    # Step 1: Separate each element in the list into individual strings
+    transformed_dataset = []
+    for element in input_dataset:
+        transformed_element = element.split("", "")
+        transformed_dataset.append(transformed_element)
+    return transformed_dataset
+
+"
+43_2,"def transform_data(input_data):
+    # Step 1: Separate the names and companies
+    names = []
+    companies = []
+    for name, company in input_data:
+        names.append(name)
+        companies.append(company)
+    
+    # Step 2: Flatten the lists
+    flattened_names = list(chain(*names))
+    flattened_companies = list(chain(*companies))
+    
+    # Step 3: Combine the flattened lists
+    combined_list = flattened_names + flattened_companies
+    
+    return combined_list
+"
+43_3,"import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Separate the names and companies
+    names = []
+    companies = []
+    for name, company in input_data:
+        names.append(name)
+        companies.append(company)
+    
+    # Step 2: Create a new column for the company names
+    companies_column = pd.Series([company for name, company in input_data])
+    
+    # Step 3: Merge the names and companies
+    merged_data = pd.merge(names, companies, on='name')
+    
+    # Step 4: Add a new column for the merger information
+    mergers_column = pd.Series([('Mergers & Acquisitions') for _ in range(len(merged_data))])
+    
+    # Step 5: Return the transformed data
+    return merged_data, mergers_column
+"
+43_4,"import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Extract the names from the input data
+    names = input_data['Name']
+    
+    # Step 2: Create a new column with the extracted names
+    names_new = names.dropna()
+    
+    # Step 3: Add the names to the input data
+    input_data['Names'] = names_new
+    
+    return input_data
+
+"
+43_5,"def transform_data(input_data):
+    # Step 1: Extract names from the input data
+    names = []
+    for item in input_data:
+        names.append(item[0])
+    
+    # Step 2: Extract company names from the input data
+    companies = []
+    for name in names:
+        if ""Partner"" in name:
+            companies.append(name.split("" Partner"")[0])
+    
+    # Step 3: Extract locations from the input data
+    locations = []
+    for name in names:
+        if ""Palo Alto"" in name:
+            locations.append(name.split("" Palo Alto"")[0])
+    
+    # Step 4: Extract merger & acquisition information from the input data
+    mergers_acquisitions = []
+    for name in names:
+        if ""Mergers & Acquisitions"" in name:
+            mergers_acquisitions.append(name.split("" Mergers & Acquisitions"")[0])
+    
+    # Step 5: Return the transformed data
+    return [names, companies, locations, mergers_acquisitions]
+"
+44_1,"def transform_data(input_dataset):
+    # Step 1: Extract Last Name and First Name
+    last_name = input_dataset.pop('Last Name:')
+    first_name = input_dataset.pop('First Name:')
+    
+    # Step 2: Extract Card Number
+    card_number = input_dataset.pop('Card Number:')
+    
+    # Step 3: Extract Badge Expiration Date
+    badge_expiration_date = input_dataset.pop('Badge Expiration Date:')
+    
+    # Step 4: Extract Status
+    status = input_dataset.pop('Status:')
+    
+    # Step 5: Create Output Dataset
+    output_dataset = {
+        'Last Name': last_name,
+        'First Name': first_name,
+        'Card Number': card_number,
+        'Badge Expiration Date': badge_expiration_date,
+        'Status': status
+    }
+    
+    return output_dataset
+
+"
+44_2,"def transform_data(input_data):
+    # Step 1: Extract Last Name and First Name columns
+    last_name = input_data[0][:]
+    first_name = input_data[1][:]
+    
+    # Step 2: Extract Card Number and Badge Expiration Date columns
+    card_number = input_data[2][:]
+    badge_expiration_date = input_data[3][:]
+    
+    # Step 3: Extract Status column
+    status = input_data[4][:]
+    
+    # Step 4: Remove empty rows
+    filtered_data = [row for row in input_data if row!= []]
+    
+    # Step 5: Concatenate columns into a single list
+    combined_data = [last_name, first_name, card_number, badge_expiration_date, status] + [row[0] for row in filtered_data]
+    
+    return combined_data
+
+"
+44_3,"
+import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Extract Last Name and First Name columns
+    last_name = input_data['Last Name:']
+    first_name = input_data['First Name:']
+    
+    # Step 2: Extract Card Number and Badge Expiration Date columns
+    card_number = input_data['Card Number:']
+    badge_expiration_date = input_data['Badge Expiration Date:']
+    
+    # Step 3: Extract Status column
+    status = input_data['Status:']
+    
+    # Step 4: Create new dataframe with transformed columns
+    transformed_data = pd.DataFrame({last_name: [last_name], first_name: [first_name], card_number: [card_number], badge_expiration_date: [badge_expiration_date], status: [status]})
+    
+    return transformed_data
+"
+
+44_4,"def transform_data(input_data):
+    # Step 1: Extract Last Name and First Name columns
+    last_name = input_data[0][:]
+    first_name = input_data[1][:]
+    
+    # Step 2: Extract Card Number and Badge Expiration Date columns
+    card_number = input_data[2][:]
+    badge_expiration_date = input_data[3][:]
+    
+    # Step 3: Extract Status column
+    status = input_data[4][:]
+    
+    # Step 4: Concatenate all columns into a single list
+    combined_data = [last_name, first_name, card_number, badge_expiration_date, status]
+    
+    return combined_data
+"
+44_5,"def transform_data(input_data):
+    # Step 1: Extract Last Name and First Name columns
+    last_name = input_data[0][:]
+    first_name = input_data[1][:]
+    
+    # Step 2: Extract Card Number and Badge Expiration Date columns
+    card_number = input_data[2][:]
+    badge_expiration_date = input_data[3][:]
+    
+    # Step 3: Extract Status column
+    status = input_data[4][:]
+    
+    # Step 4: Create a new list with all the columns
+    transformed_data = [last_name, first_name, card_number, badge_expiration_date, status]
+    
+    return transformed_data
+"
+45_1,"transformed_data = []
+
+2. Loop through each element in the original dataset.
+"
+45_2,"def transform_data(input_dataset):
+    # Initialize empty output datasets for each house
+    house_datasets = {}
+    
+    # Loop through each row in the input dataset
+    for i, row in enumerate(input_dataset):
+        
+        # Extract the house name and number from the current row
+        house_name = row[0]
+        house_number = int(row[1])
+        
+        # If the house name and number do not already have a corresponding entry in the output datasets, create one
+        if house_name not in house_datasets or house_number not in house_datasets[house_name]:
+            house_datasets[house_name][house_number] = []
+            
+        # Append the current row to the corresponding output dataset
+        house_datasets[house_name][house_number].append(row[2])
+    
+    # Return the transformed output datasets
+    return house_datasets
+"
+45_3,"# Split the input dataset into separate lists for each column
+house_list = ['House 1', 'House 2', 'House 3']
+person_list = ['Bob', 'Anne', 'Josh']
+value_list = []
+
+2. Create a new list to store the transformed data.
+"
+45_4,"def transform_data(input_data):
+    # Step 1: Separate the names and numbers from the houses
+    names = []
+    numbers = []
+    for name, house in input_data:
+        names.append(name)
+        numbers.append(house)
+    
+    # Step 2: Create a new list with the names and numbers separated
+    output_data = names + numbers
+    
+    return output_data
+
+"
+45_5,"def transform_data(input_data):
+    # Step 1: Separate house names and numbers
+    house_names = []
+    number_list = []
+    for row in input_data:
+        house_names.append(row[0])
+        number_list.append(row[1])
+    
+    # Step 2: Create a new list with the house names and numbers
+    output_data = [house_names, number_list]
+    
+    return output_data
+"
+46_1,"def transform_data(input_data):
+    # Step 1: Concatenate all elements in the list
+    output = []
+    for element in input_data:
+        output.append(element)
+    
+    # Step 2: Add a new element to the end of the list
+    output.append('def')
+    
+    # Step 3: Return the transformed data
+    return output
+"
+46_2,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = list(set(input_data))
+    
+    # Step 2: Replace values with empty strings
+    for i in range(len(unique_data)):
+        unique_data[i] = """"
+    
+    # Step 3: Add new values
+    for i in range(len(unique_data)):
+        unique_data[i] += ""x""
+    
+    return unique_data
+
+"
+46_3,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = list(set(input_data))
+    
+    # Step 2: Replace values with corresponding indices
+    replaced_data = [[i, j] for i, v in enumerate(unique_data) for j in range(len(v))]
+    
+    # Step 3: Add new column with concatenated values
+    combined_data = [[i, j, *[v[k]] for k in range(len(v)))]
+    
+    # Step 4: Rearrange columns
+    rearranged_data = [[*[i, j], *combined_data[k]] for i, j in zip(unique_data, replaced_data)]
+    
+    return rearranged_data
+
+"
+46_4,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = list(set(input_data))
+    
+    # Step 2: Replace spaces with underscores
+    data = [item.replace(' ', '_') for item in unique_data]
+    
+    # Step 3: Add a new column with the value ""x""
+    data.append('x')
+    
+    # Step 4: Rearrange columns
+    data = [[item[0], item[1], item[2]] for item in data]
+    
+    return data
+"
+46_5,"def transform_data(input_data):
+    # Step 1: Remove duplicates
+    unique_data = list(set(input_data))
+    
+    # Step 2: Replace spaces with underscores
+    data = [item.replace(' ', '_') for item in unique_data]
+    
+    # Step 3: Add a new column with the value ""x""
+    data.append('x')
+    
+    # Step 4: Rearrange columns
+    data = [[item[i], item[i+1]] for i in range(len(data)-1)]
+    
+    return data
+"
+47_1,"transformed_data = []
+for i in range(len(dataset)):
+    transformed_data.append(dataset[i] + transformed_data[-1])
+transformed_data = list(transformed_data)
+
+This code will take in any input dataset and perform the same data transformation steps as the example provided."
+47_2,"
+import pandas as pd
+
+def transform_data(input_data):
+    # Step 1: Split the input data into separate columns
+    input_data = input_data.drop(columns=[""""])  # Remove any empty columns
+    input_data = input_data.drop(columns=[""A""]).rename(columns={""B"": ""BB"", ""C"": ""BC"", ""D"": ""BD"", ""EE"": ""EED""})  # Rename some columns
+    input_data = input_data.drop(columns=[""F""]).rename(columns={""G"": ""FG"", ""H"": ""FH"", ""I"": ""FI"", ""JJ"": ""JJI""})  # Rename some more columns
+
+    # Step 2: Combine some columns
+    combined_columns = [""BB"", ""BC"", ""BD"", ""EED"", ""FG"", ""FH"", ""FI"", ""JJI""]
+    input_data = pd.concat([input_data[column] for column in combined_columns], axis=0)
+
+    return input_data
+"
+
+47_3,"def transform_data(input_dataset):
+    # Step 1: Split the input dataset into separate lists for each letter
+    letters = [list(x) for x in input_dataset]
+    
+    # Step 2: Combine the lists of letters into new lists based on the order of the letters
+    combined_letters = [letters[i] + letters[i+1] for i in range(len(letters)-1)]
+    
+    # Step 3: Repeat the combination step until all letters have been combined once
+    repeated_combinations = [combined_letters[i] + combined_letters[i+1] for i in range(len(combined_letters)-1)]
+    
+    # Step 4: Flatten the resulting lists into a single list
+    final_dataset = [letter for sublist in repeated_combinations for letter in sublist]
+    
+    return final_dataset
+"
+47_4,"def transform_data(input_data):
+    # Step 1: Separate the data into separate lists for each letter
+    letters = [list(x) for x in input_data]
+    
+    # Step 2: Combine the lists of letters into new lists based on the pattern ""ABCD...""
+    combined_letters = [letters[i] + letters[i+1] for i in range(len(letters)-1)]
+    
+    # Step 3: Repeat step 2 until all letters have been combined
+    for _ in range(len(combined_letters)-1):
+        combined_letters.append(combined_letters[-1] + combined_letters[0])
+    
+    # Step 4: Return the final list of combined letters
+    return combined_letters
+"
+47_5,"def transform_data(input_data):
+    # Step 1: Separate the data into two lists - one for the first column and another for the rest of the columns
+    col1 = [item[0] for item in input_data]
+    col2 = [item[1:] for item in input_data]
+
+    # Step 2: Combine the two lists into a single list with the first column as the index
+    combined_data = [col1[i] + col2[i] for i in range(len(col1))]
+
+    return combined_data"
+48_1,"import pandas as pd
+
+2. Load the input dataset:
+"
+48_2,"def transform_data(input_data):
+    # Step 1: Extract Company Names
+    company_names = []
+    for item in input_data:
+        if ""*"" in item:
+            company_names.append(item.split(""*"")[0])
+    
+    # Step 2: Extract Addresses
+    addresses = []
+    for item in input_data:
+        if ""Address"" in item:
+            addresses.append(item.split(""Address"")[1])
+    
+    # Step 3: Extract Cities
+    cities = []
+    for item in input_data:
+        if ""City"" in item:
+            cities.append(item.split(""City"")[1])
+    
+    # Step 4: Extract States
+    states = []
+    for item in input_data:
+        if ""State"" in item:
+            states.append(item.split(""State"")[1])
+    
+    # Step 5: Extract Zips
+    zips = []
+    for item in input_data:
+        if ""Zip"" in item:
+            zips.append(item.split(""Zip"")[1])
+    
+    # Step 6: Extract Phones
+    phones = []
+    for item in input_data:
+        if ""Phone"" in item:
+            phones.append(item.split(""Phone"")[1])
+    
+    # Combine the extracted data into a new list
+    transformed_data = [company_names, addresses, cities, states, zips, phones]
+    
+    return transformed_data
+
+"
+48_3,"def transform_data(input_data):
+    # Step 1: Extract Company Names
+    company_names = []
+    for item in input_data:
+        if ""*"" in item:
+            company_names.append(item.split(""*"")[0])
+    
+    # Step 2: Extract Addresses
+    addresses = []
+    for item in input_data:
+        if ""Address"" in item:
+            addresses.append(item.split(""Address"")[1])
+    
+    # Step 3: Extract Cities
+    cities = []
+    for item in input_data:
+        if ""City"" in item:
+            cities.append(item.split(""City"")[1])
+    
+    # Step 4: Extract States
+    states = []
+    for item in input_data:
+        if ""State"" in item:
+            states.append(item.split(""State"")[1])
+    
+    # Step 5: Extract Zips
+    zips = []
+    for item in input_data:
+        if ""Zip"" in item:
+            zips.append(item.split(""Zip"")[1])
+    
+    # Step 6: Extract Phones
+    phones = []
+    for item in input_data:
+        if ""Phone"" in item:
+            phones.append(item.split(""Phone"")[1])
+    
+    # Step 7: Extract Websites
+    websites = []
+    for item in input_data:
+        if ""Website"" in item:
+            websites.append(item.split(""Website"")[1])
+    
+    # Combine the extracted data into a new list
+    transformed_data = [company_names, addresses, cities, states, zips, phones, websites]
+    
+    return transformed_data
+"
+48_4,"def transform_data(input_data):
+    # Step 1: Extract Company Names
+    company_names = []
+    for row in input_data:
+        if ""*"" in row:
+            company_names.append(row.split(""*"")[1])
+    
+    # Step 2: Extract Addresses
+    addresses = []
+    for row in input_data:
+        if row.startswith(""Address""):
+            addresses.append(row.split("" "")[1])
+    
+    # Step 3: Extract Cities
+    cities = []
+    for row in input_data:
+        if row.startswith(""City""):
+            cities.append(row.split("" "")[1])
+    
+    # Step 4: Extract States
+    states = []
+    for row in input_data:
+        if row.startswith(""State""):
+            states.append(row.split("" "")[1])
+    
+    # Step 5: Extract Zips
+    zips = []
+    for row in input_data:
+        if row.startswith(""Zip""):
+            zips.append(row.split("" "")[1])
+    
+    # Step 6: Extract Phones
+    phones = []
+    for row in input_data:
+        if row.startswith(""Phone""):
+            phones.append(row.split("" "")[1])
+    
+    # Step 7: Create New Dataframe
+    new_dataframe = pd.DataFrame({""Company Name"": company_names, ""Address"": addresses, ""City"": cities, ""State"": states, ""Zip"": zips, ""Phone"": phones})
+    return new_dataframe
+"
+48_5,"def transform_data(input_data):
+    # Step 1: Extract Company Names
+    company_names = []
+    for item in input_data:
+        if ""*"" in item:
+            company_names.append(item.split(""*"")[1])
+    # Step 2: Extract Addresses
+    addresses = []
+    for item in input_data:
+        if ""Address"" in item:
+            addresses.append(item.split(""Address"")[1])
+    # Step 3: Extract Cities
+    cities = []
+    for item in input_data:
+        if ""City"" in item:
+            cities.append(item.split(""City"")[1])
+    # Step 4: Extract States
+    states = []
+    for item in input_data:
+        if ""State"" in item:
+            states.append(item.split(""State"")[1])
+    # Step 5: Extract Zips
+    zips = []
+    for item in input_data:
+        if ""Zip"" in item:
+            zips.append(item.split(""Zip"")[1])
+    # Step 6: Extract Phones
+    phones = []
+    for item in input_data:
+        if ""Phone"" in item:
+            phones.append(item.split(""Phone"")[1])
+    # Step 7: Extract Websites
+    websites = []
+    for item in input_data:
+        if ""Website"" in item:
+            websites.append(item.split(""Website"")[1])
+    # Step 8: Combine Data
+    combined_data = [company_names, addresses, cities, states, zips, phones, websites]
+    return combined_data
+"
+49_1,"def transform_data(input_data):
+    # Step 1: Remove empty strings
+    filtered_data = []
+    for item in input_data:
+        if len(item) > 0:
+            filtered_data.append(item)
+    input_data = filtered_data
+
+    # Step 2: Replace spaces with underscores
+    for i in range(len(input_data)):
+        input_data[i] = input_data[i].replace("" "", ""_"")
+
+    # Step 3: Add a unique identifier for each row
+    unique_ids = [random.randint(1, 100) for _ in range(len(input_data))]
+    input_data = [(unique_id, item) for (unique_id, item) in zip(unique_ids, input_data)]
+
+    return input_data
+
+"
+49_2,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = [row for row in input_data if len(row) > 0]
+    
+    # Step 2: Replace blank cells with corresponding column values
+    for i in range(len(filtered_data)):
+        row = filtered_data[i]
+        for j in range(len(row)):
+            if row[j] == """":
+                row[j] = row[j + 1]
+    
+    # Step 3: Transpose data
+    transposed_data = [[row[i] for i in range(len(row))] for row in filtered_data]
+    
+    # Step 4: Add new columns
+    for i in range(len(transposed_data)):
+        transposed_data[i].append(""New Column"")
+    
+    return transposed_data
 
 
+"
+49_3,"def transform_data(input_data):
+    # Step 1: Remove empty rows
+    filtered_data = [row for row in input_data if len(row) > 0]
+    
+    # Step 2: Replace blank cells with corresponding column values
+    for i in range(len(filtered_data)):
+        row = filtered_data[i]
+        for j in range(len(row)):
+            if row[j] == """":
+                row[j] = row[j + 1]
+    
+    # Step 3: Transpose data
+    transposed_data = [[row[i] for i in range(len(row))] for row in filtered_data]
+    
+    # Step 4: Rearrange columns
+    rearranged_data = [list(column) for column in zip(*transposed_data)]
+    
+    return rearranged_data
+"
+49_4,"def transform_data(input_data):
+    # Step 1: Replace all instances of ""Art&Des"" with ""CreatArt""
+    new_data = []
+    for item in input_data:
+        if ""Art&Des"" in item:
+            new_item = item.replace(""Art&Des"", ""CreatArt"")
+        else:
+            new_item = item
+        new_data.append(new_item)
+    return new_data
+"
+49_5,"def transform_data(input_data):
+    # Step 1: Create a new list to store the transformed data
+    transformed_data = []
+
+    # Loop through each element in the input data
+    for element in input_data:
+        # Extract the values from the element
+        name = element[0]
+        grade = element[1]
+
+        # Add the transformed value to the new list
+        transformed_data.append([name, grade])
+
+    return transformed_data"
+51_1,"import pandas as pd
+
+# Extract column names from original dataset
+column_names = list(df.columns)
+
+2. Create a new dataframe by dropping the first column (which contains empty strings) and adding a new column with the values in the second column of the original dataset.
+"
+51_2,"import pandas as pd
+
+# Extract column names from original dataset
+column_names = list(df.columns)
+
+2. Create a new dataframe with the extracted column names as index:
+"
+51_3,"def transform_data(input_data):
+    # Initialize empty lists to store the transformed data
+    qualities = []
+    dates = []
+
+    # Loop through each element in the input data
+    for index, element in enumerate(input_data):
+        # If the current element is a string, add it to the qualities list
+        if type(element) == str:
+            qualities.append(element)
+        # If the current element is a datetime object, add it to the dates list
+        elif type(element) == datetime:
+            dates.append(element)
+
+    # Combine the qualities and dates lists into a single list
+    transformed_data = qualities + [dates]
+
+    return transformed_data
+"
+51_4,"def transform_data(input_data):
+    # Initialize empty lists to store the transformed data
+    qualities = []
+    dates = []
+
+    # Loop through each element in the input data
+    for index, element in enumerate(input_data):
+        # Extract the name and date from the element
+        name = element[0]
+        date = element[1]
+
+        # Add the name and date to the appropriate list
+        qualities.append(name)
+        dates.append(date)
+
+    # Return the transformed data as a list of tuples
+    return zip(qualities, dates)"
+51_5, "def transform_data(input_data):
+ # Initialize empty lists to store the transformed data
+    qualities = []
+    dates = []
+# Loop through each element in the input data\n    
+for index, element in enumerate(input_data):
+        # If the current element is a string, add it to the qualities list
+        if type(element) == str:
+            qualities.append(element)
+                # If the current element is a datetime object, add it to the dates list
+        elif type(element) == datetime:
+            dates.append(element)    # Combine the qualities and dates lists into a single list\n    
+        transformed_data = qualities + [dates]\n\n    
+return transformed_data"
 
 craigslist_data_wrangler_1,"input_string = '$2475 / 2br - Superb location - (palo alto) pic'
 left_side = input_string[:input_string.find('/')]

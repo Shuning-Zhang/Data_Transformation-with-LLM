@@ -45,4 +45,4 @@ for x in result[:-1]:
 
     output.append(d)
 df = pd.DataFrame(output)
-df.to_csv('output_chat_llama2.csv', index=False)
+df.to_csv('output_chat_llama2_2.csv', index=False)

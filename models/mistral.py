@@ -1,20 +1,25 @@
 import torch
-from transformers import (
-    AutoModelForCausalLM,
-    AutoTokenizer,
-    BitsAndBytesConfig,
-    pipeline
+from transformers import BitsAndBytesConfig
+from langchain import HuggingFacePipeline
+from langchain import PromptTemplate, LLMChain
+from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+
+quantization_config = BitsAndBytesConfig(
+    load_in_4bit=True,
+    bnb_4bit_compute_dtype=torch.float16,
+    bnb_4bit_quant_type="nf4",
+    bnb_4bit_use_double_quant=True,
 )
 
-torch.set_default_device('cuda')
-tokenizer = AutoTokenizer.from_pretrained("/content/drive/MyDrive/Generative AI/LLM Models/Mistral-7B-v0.1")
+tokenizer =transformers.AutoTokenizer.from_pretrained("../../Mistral-7B")
 model = AutoModelForCausalLM.from_pretrained(
-    "/content/drive/MyDrive/Generative AI/LLM Models/Mistral-7B-v0.1/",
+    "/content/Mistral-7B-v0.1/",
     trust_remote_code=True,
     device_map="auto",
-    load_in_8bit=True,# For 8 bit quantization,
+    quantization_config=quantization_config,
     max_memory={0:"15GB"}
 )
+
 model.eval()
 model = torch.compile(model, mode = "max-autotune", backend="inductor")
 

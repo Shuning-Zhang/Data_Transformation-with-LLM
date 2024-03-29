@@ -4,10 +4,10 @@ from langchain.prompts import PromptTemplate
 from IPython.display import display, Markdown
 from langchain.chains import LLMChain
 from transformers import BitsAndBytesConfig
-from langchain.llms import HuggingFacePipeline
+from langchain_community.llms import HuggingFacePipeline
 import json
 import torch
-
+import csv
 #model_id = "../../Mistral-7B"
 # model_id = "mistralai/Mistral-7B-Instruct-v0.1"
 # tokenizer = AutoTokenizer.from_pretrained(model_id)
@@ -41,7 +41,8 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
         bnb_4bit_quant_type="nf4",
         bnb_4bit_use_double_quant=True,
 )
-        model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto",,quantization_config=quantization_config)
+        model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto")
+#,quantization_config=quantization_config)
         model.eval()
 
         return model
@@ -56,7 +57,7 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
             tokenizer=tokenizer,
             use_cache=True,
             device_map="auto",
-            max_length=2500,
+            max_length=8000,
             do_sample=True,
             top_k=5,
             num_return_sequences=1,
@@ -94,7 +95,7 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
         llm = self.pipline()
         prompt = PromptTemplate(template=template, input_variables=['input_list', 'output_list'])
         llm_chain = LLMChain(prompt=prompt, llm=llm)
-        response = llm_chain.run({'input_list': input, 'output_list': label})
+        response = llm_chain.invoke({'input_list': input, 'output_list': label})
         return response
     
     def read_in_data(self,file_name):
@@ -114,8 +115,9 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
     
     def gpt_output(self):
         result= []
-        for j in range(2,3):
-            if j in [31, 32, 35, 38, 39, 42,50]:
+        output = []
+        for j in range(18,25):
+            if j in [9,14, 16,20,21,23, 25, 31, 31, 32, 35, 38, 39, 42,50]:
                 continue
             else:
                 for i in range(1,6):
@@ -126,7 +128,30 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
                     result.append([str(j) + '_'+ str(i), tutorial])
                     self.ans.append([str(j) + '_'+ str(i), tutorial])
                     print(j,i)
+                for x in result:
+                    code = x[1].split('[/INST] </s>')
+                    if "```python\n" in code:
+                        o = code[1].split("```python\n")
+                    else:
+                        o = code[1].split('Generated Code:\n')
+
+                    if len(o) == 2:
+                        d = {'data': x[0],'output':o[1]}
+                    else:
+                        d = {'data': x[0],'output':o[0]}
+
+      # o = o[1].split("\n```\nEnd of code generation!")
+      # d = {'data': x[0],'output':o[1]}
+                    print(d)
+                    output.append(d)
+                with open('output_mistral_'+str(j)+'.csv', 'w', newline='') as file:
+                    writer = csv.writer(file)
+
+    # Write each row to the CSV file
+                    writer.writerows(output)
         return result
-    
+
+
+ 
 
 

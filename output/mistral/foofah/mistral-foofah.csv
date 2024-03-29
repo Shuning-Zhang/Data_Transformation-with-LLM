@@ -1,0 +1,254 @@
+data,output
+2_1,"```python
+import csv
+
+def transform_dataset(input_data):
+    # Create a list to store the transformed data
+    transformed_data = []
+    
+    # Iterate through each row in the input data
+    for row in input_data:
+        # Extract the relevant columns
+        row1, row2, row3, row4, row5, row6, row7 = row
+        
+        # Combine the first two columns and append them to the transformed data
+        transformed_data.append([row1 +'' + row2, row3, row4, row5, row6, row7])
+        
+    return transformed_data
+
+# Example usage
+input_data = [['3099', '905','AUST 4WD CUST ACT', '', '', '', ''], ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0']]
+transformed_data = transform_dataset(input_data)
+
+print(transformed_data)
+```"
+2_2,"
+def transform\_data(input\_data):
+""""""
+Function to transform input data
+""""""
+output\_data = []
+
+for row in input\_data:
+output\_data.append([row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]])
+
+return output\_data
+
+input\_data = [['3099', '905','AUST 4WD CUST ACT', '', '', '', ''], ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'], ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''], ['"
+2_3,"```python
+import csv
+import pandas as pd
+
+def transform_data(data):
+    # Convert the input data to a pandas dataframe
+    df = pd.DataFrame(data)
+
+    # Remove empty cells
+    df = df.dropna()
+
+    # Remove duplicate rows
+    df = df.drop_duplicates()
+
+    # Create new columns based on input data
+    df['Date'] = df['9']
+    df['Product'] = df['1']
+    df['Issue Number'] = df['2']
+    df['Category'] = df['3']
+    df['Price'] = df['4']
+    df['Quantity'] = df['5']
+    df['Discount Amount'] = df['6']
+    df['Total'] = df['7']
+    
+    # Remove columns with empty values
+    df = df.dropna()
+
+    # Remove columns with empty values
+    df = df.dropna()
+
+    # Remove duplicate rows
+    df = df.drop_duplicates()
+
+    return df"
+2_4,"```python
+# Import necessary libraries
+import pandas as pd
+
+def data_transformation(input_data):
+    # Remove empty rows and columns
+    input_data = input_data.dropna()
+    input_data = input_data.drop('', axis=1)
+
+    # Add a column for the product type and remove the original product type column
+    input_data = pd.get_dummies(input_data, columns=['product type'])
+    input_data = input_data.drop('product type', axis=1)
+
+    # Remove the original order ID column
+    input_data = input_data.drop('order ID', axis=1)
+
+    # Add a column for the order month and remove the original order month columns
+    input_data = pd.to_datetime(input_data['order date'], format='%d-%m-%Y')
+    input_data = input_data.dt.month
+    input_data = input_data.reset_index()
+    input_data = pd.get_dummies(input_data, columns=[1])
+    input_data = input_data.drop(columns=[0, 1])
+
+    return input_data
+
+# Example usage
+example_data = [['3099', '905','AUST 4WD CUST ACT', '', '', '', ''], ['NO.14', 'NO.14', 'Full Copies', '6.7839', '2', '* *', '0'], ['3200', '906', 'AUST HOUSE & GARDEN', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '4.7385', '1', '* *', '0'], ['3167', '906', 'AUST PERSONAL COMPUTER', '', '', '', ''], ['9-Jun', '9-Jun', 'Covers Only', '6.7839', '3', '* *', '0'], ['2929', '924', 'AUTO ACTION', '', '', '', ''], ['#1344', '#1344', 'Covers Only', '3.8181', '3', '* *', '0']]
+
+transformed_data = data_transformation(example_data)
+print(transformed_data)"
+2_5,"```
+import csv
+import numpy as np
+from collections import defaultdict
+
+def process_data(data):
+    # create empty list to store transformed data
+    transformed_data = []
+    for row in data:
+        # extract row information
+        item_code = row[0]
+        item_name = row[1]
+        item_category = row[3]
+        item_date = row[4]
+        item_format = row[2]
+        item_price = float(row[6])
+        item_quantity = int(row[5])
+        
+        # create a dictionary to store item information
+        item = defaultdict(list)
+        item['item_code'] = item_code
+        item['item_name'] = item_name
+        item['item_category'] = item_category
+        item['item_date'] = item_date
+        item['item_format'] = item_format
+        item['item_price'] = item_price
+        item['item_quantity'] = item_quantity
+        transformed_item = [item[key] for key in item]
+        # append transformed item to list
+        transformed_data.append(transformed_item)
+    return transformed_data
+```
+This code takes in a list of data, where each row represents a product and contains information such as item code, name, category, date, format, price, and quantity. It then uses a dictionary to store each item's information and appends the transformed item to a list. This code can be used with any input dataset to perform the same data transformation steps."
+3_1,"```python
+import csv
+
+def data_transformation(input_data):
+    output_data = []
+    for row in input_data:
+        date_str, date_id, promotion_str = row
+        date_obj = datetime.strptime(date_str, '%m/%d/%Y')
+        date_id = int(date_str.replace(':', ''))
+        output_data.append([date_id, promotion_str, date_obj.strftime('%Y-%m-%d')])
+    return output_data
+
+input_data = [['33195', '', '2/13/2009', '821017'], ['Promotion', '3/30/2009', '65320']]
+output_data = data_transformation(input_data)
+
+print(output_data)
+```
+This is a Python code that performs data transformation on a given input dataset. The `data_transformation` function takes in an input dataset and returns a transformed output dataset. The transformation involves extracting the date string and date id from the input data, converting the date string to a date object, and appending a new row to the output dataset with the transformed data. The input and output datasets are stored in the `input_data` and `output_data` variables respectively, and the output dataset is printed to the console."
+3_2,"```python
+import csv
+
+def data_transformation(input_data, output_data, delimiter=''):
+    with open(input_data, 'r') as input_file, open(output_data, 'w', newline='') as output_file:
+        reader = csv.reader(input_file, delimiter=delimiter)
+        writer = csv.writer(output_file)
+        writer.writerow(['ID', 'Action', 'Date', 'Amount'])
+        for row in reader:
+            if len(row) == 1:
+                # If there is only one column, add a default value for the others
+                row = ['33195', 'Promotion', row[0], '']
+            elif len(row) == 2:
+                # If there are only two columns, add a default value for the others
+                row = ['33195', row[0], row[1], '']
+                # Add a default date value if not provided
+                if len(row) == 2:
+                    row.append('')
+            elif len(row) == 3:
+                # If there are three columns, add a default value for the others
+                row = ['', row[1], row[2], '']
+            elif len(row) == 4:
+                # If there are four columns, add a default value for the others
+                row = ['', '', row[2], '']
+            writer.writerow(row)
+
+# Example usage
+input_data = 'path/to/input/data.csv'
+output_data = 'path/to/output/data.csv'
+data_transformation(input_data, output_data)"
+3_3,"```python
+# Input dataset
+data = [
+    ['33195', 'Promotion', '2/13/2009', '821017'],
+    ['33195', 'Promotion', '3/30/2009', '65320'],
+    ['50999', 'Inc Actvty -  Year end', '2/16/2009', '64023'],
+    ['50999', 'Inc Actvty -  Year end', '3/2/2009', '64519'],
+    ['50999', 'Inc Actvty -  Year end', '3/2/2009', '64519'],
+    ['50999', 'Inc Actvty -  Year end', '3/16/2009', '164351'],
+    ['71000', 'Contribution Pending', '3/31/2009', '65354']
+]
+
+# Data transformation process
+for i in range(len(data)):
+    if data[i][3] == '':
+        data[i][3] = '39888'
+    elif data[i][3]!= '':
+        data[i][3] = data[i][3].replace(' ', '_')
+
+# Convert data to list of tuples
+transformed_data = [tuple(row) for row in data]
+
+# Output transformed data
+print(transformed_data)"
+3_4,"
+import csv
+import re
+
+# Read input dataset
+def read\_input(input\_path):
+input\_file = open(input\_path, 'r')
+input\_data = []
+for row in input\_file:
+row\_values = row.split(',')
+if len(row\_values) > 1:
+input\_data.append(tuple(row\_values[1:]))
+return input\_data
+input\_data = read\_input('example\_input.csv')
+
+# Perform data transformation
+def transform(data):
+# Remove empty rows
+data = [row for row in data if row!= ['']]
+# Remove empty cells
+data = [[row if row else [] for row in row] for row in data]
+# Convert date strings to datetime objects
+for i in range(len(data)):"
+3_5,"```python
+import csv
+from datetime import datetime
+
+input_file = ""input_data.csv""
+output_file = ""output_data.csv""
+
+def convert_date(date_str):
+    return datetime.strptime(date_str, ""%m/%d/%Y"").strftime(""%Y-%m-%d"")
+
+with open(input_file, 'r') as infile:
+    reader = csv.reader(infile)
+    next(reader) # skip header row
+    data = []
+    for row in reader:
+        if len(row) == 1:
+            data.append(row)
+        else:
+            data.append(convert_date(row[1])) + row[2:]
+
+with open(output_file, 'w') as outfile:
+    writer = csv.writer(outfile)
+    next(writer) # skip header row
+    for row in data:
+        writer.writerow(row)"

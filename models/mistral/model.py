@@ -3,9 +3,10 @@ from transformers import pipeline
 from langchain.prompts import PromptTemplate
 from IPython.display import display, Markdown
 from langchain.chains import LLMChain
+from transformers import BitsAndBytesConfig
 from langchain.llms import HuggingFacePipeline
 import json
-
+import torch
 
 #model_id = "../../Mistral-7B"
 # model_id = "mistralai/Mistral-7B-Instruct-v0.1"
@@ -34,8 +35,13 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
         self.ans = []
 
     def model(self):
-        
-        model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto")
+        quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.float16,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True,
+)
+        model = AutoModelForCausalLM.from_pretrained(self.model_id, device_map="auto",,quantization_config=quantization_config)
         model.eval()
 
         return model
@@ -44,28 +50,52 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
         model = self.model()
         tokenizer = AutoTokenizer.from_pretrained(self.model_id)
         print('tokenizer loaded')
-        generate_text = pipeline(
-            model=model, tokenizer=tokenizer,
-            return_full_text=True,  # langchain expects the full text
-            task='text-generation',
-            # we pass model parameters here too
-            temperature=0.05,  # 'randomness' of outputs, 0.0 is the min and 1.0 the max
-            max_new_tokens=512,  # mex number of tokens to generate in the output
-            repetition_penalty=1.1  # without this output begins repeating
-            )
+        pipeline_inst = pipeline(
+            "text-generation",
+            model=model,
+            tokenizer=tokenizer,
+            use_cache=True,
+            device_map="auto",
+            max_length=2500,
+            do_sample=True,
+            top_k=5,
+            num_return_sequences=1,
+            eos_token_id=tokenizer.eos_token_id,
+            pad_token_id=tokenizer.eos_token_id,
+)
         print('pipeline loaded')
-        llm = HuggingFacePipeline(pipeline=generate_text)
+        llm = HuggingFacePipeline(pipeline=pipeline_inst)
         print('llm loaded')
         return llm
     
 
-    def get_prompt(self, instruction, system_prompt = DEFAULT_SYSTEM_PROMPT):
-        B_INST, E_INST = "[INST]", "[/INST]"
-        B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
-        
-        SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
-        prompt_template =  B_INST + SYSTEM_PROMPT + instruction + E_INST
-        return prompt_template
+    def generate_response(self, input, label):
+        template_c= '''
+        You are given an example dataset before the transformation {input_list} and after the transformation {output_list}.
+
+        Your goal is to generate a Python code that would reproduce the data transformation process,
+
+        the code should be able to take in a different input dataset and perform the same data transformation steps.
+
+        So don't use any specific example data inputs in the genetated code.
+
+        No Explanation needed in your answer and your output should be of the following format:
+
+        Generated Code:
+        Your python code and comment here.
+
+        End of code generation!
+
+    '''
+        template = """<s>[INST] You are an respectful and helpful assistant, 
+        respond always be precise, assertive and politely answer in few words conversational english.
+        Answer the question below from context below :""" + template_c + """[/INST] </s>
+        """
+        llm = self.pipline()
+        prompt = PromptTemplate(template=template, input_variables=['input_list', 'output_list'])
+        llm_chain = LLMChain(prompt=prompt, llm=llm)
+        response = llm_chain.run({'input_list': input, 'output_list': label})
+        return response
     
     def read_in_data(self,file_name):
         test_data = None
@@ -82,21 +112,17 @@ You are a helpful, respectful and honest assistant. Always answer as helpfully a
 
         return input_data, output_data
     
-    def gpt_output(self, llm, template_c, sys_prompt):
+    def gpt_output(self):
         result= []
         for j in range(2,3):
             if j in [31, 32, 35, 38, 39, 42,50]:
                 continue
             else:
                 for i in range(1,6):
-                    path = '../data/foofah/foofah/exp0_'+j + '_'+ str(i)+ '.txt'
+                    path = '../../data/foofah/foofah/exp0_'+str(j) + '_'+ str(i)+ '.txt'
                     input_data, test_data = self.read_in_data(path)
                     #
-                    prompt_template = self.get_prompt(template_c,sys_prompt)
-                    p_tutorial= PromptTemplate(template=prompt_template,input_variables=['input_list', 'output_list'])
-                    chain1 = LLMChain(llm = llm, prompt = p_tutorial)
-
-                    tutorial = chain1.run({'input_list': input_data[0], 'output_list': input_data[1]})
+                    tutorial = self.generate_response(input_data[0],input_data[1])
                     result.append([str(j) + '_'+ str(i), tutorial])
                     self.ans.append([str(j) + '_'+ str(i), tutorial])
                     print(j,i)
